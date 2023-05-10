@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjhsgc0grl685"]
+
+[ext_resource type="Script" path="res://s_block.gd" id="1_a5gtb"]
+[ext_resource type="Texture2D" uid="uid://csdqckhp48rfb" path="res://Pieces/S.png" id="2_mgrko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brned"]
+size = Vector2(28, 20)
+
+[node name="s_block" type="CharacterBody2D"]
+script = ExtResource("1_a5gtb")
+
+[node name="S" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("2_mgrko")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3, -12, 11, -12, 11, -4, 3, -4, 3, 4, -11, 4, -11, -4, -3, -4)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_brned")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
