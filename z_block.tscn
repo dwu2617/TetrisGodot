@@ -1,27 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cijjr6bqmad73"]
+[gd_scene load_steps=3 format=3 uid="uid://cijjr6bqmad73"]
 
 [ext_resource type="Script" path="res://z_block.gd" id="1_2wq3i"]
-[ext_resource type="Texture2D" uid="uid://bumutt6g71mph" path="res://Pieces/Z.png" id="2_6vsvx"]
+[ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_3weg2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr32b"]
-size = Vector2(28, 20)
-
-[node name="z_block" type="CharacterBody2D"]
+[node name="z_block" type="Sprite2D"]
+modulate = Color(0.92549, 0.458824, 0.470588, 1)
 script = ExtResource("1_2wq3i")
 
-[node name="Z" type="Sprite2D" parent="."]
+[node name="Block" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 0)
+texture = ExtResource("2_3weg2")
+
+[node name="Block2" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_3weg2")
+
+[node name="Block3" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -8)
-texture = ExtResource("2_6vsvx")
+texture = ExtResource("2_3weg2")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-11, -12, 3, -12, 3, -4, 11, -4, 11, 4, -3, 4, -3, -4, -11, -4)
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_hr32b")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="Block4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-8, -8)
+texture = ExtResource("2_3weg2")

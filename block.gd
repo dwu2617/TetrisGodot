@@ -1,4 +1,4 @@
-class_name block extends CharacterBody2D
+class_name block extends Node2D
 
 
 var gravity = 2
@@ -9,26 +9,31 @@ var y_shift = 8
 var y_increment = 1
 var x_leftBound = -24
 var x_rightBound = 24
-var leftBoundReached = false
-var rightBoundReached = false
 var collision
+var cells = []
+var children = []
+var pivotPoint
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
+	if count == 0:
+		for block in self.get_children():
+			children.append(block)
 	count += 1
+	getCells()
 	if count%gravity_time == 0 && playing:
-		collision = move_and_collide(Vector2(0,y_shift*y_increment))
-		if collision:
-			if collision.get_collider().name != "LeftBoundary" or collision.get_collider().name != "RightBoundary":
-				playing = false
-		
+		for block in self.get_children():	
+			block.position.y += y_shift*y_increment		
+	
 	if playing:
 		if Input.is_action_just_pressed("Counterclockwise"):
-			rotate(PI/2)
+			rotate_block(PI/2)
 		if Input.is_action_just_pressed("Left"):
 			move_left()
 		if Input.is_action_just_pressed("Right"):
@@ -43,17 +48,36 @@ func _process(delta):
 			normal_drop()
 			y_increment = 1
 		
-
+func getCells():
+	cells = []
+	for block in self.get_children():
+		cells.append(block.position)
+	#print(cells)
+	
+func getChildren():
+	for block in self.get_children():
+		children.append(block)
+		
+		
 func rotate_block(radians):
-	self.rotation_degrees = radians
+	pivotPoint = cells[3]
+	var cosTheta = cos(radians)
+	var sinTheta = sin(radians)
+
+	for i in range(cells.size()):
+		
+		var cellPosition = cells[i]
+		var translatedPoint = cellPosition - pivotPoint
+		var rotatedX = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta
+		var rotatedY = translatedPoint.x * sinTheta + translatedPoint.y * cosTheta
+		children[i].position = Vector2(rotatedX,rotatedY) + pivotPoint
+	
 
 func move_left():
-	if !leftBoundReached:
-		self.position.x -= 8
+	self.position.x -= 8
 			
 func move_right():
-	if !rightBoundReached:
-		self.position.x += 8
+	self.position.x += 8
 	
 func soft_drop():
 	gravity_time = 15/gravity
@@ -67,6 +91,8 @@ func hard_drop():
 				
 func isDone():
 	return !playing
+	
+
 
 	
 	

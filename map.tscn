@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=7 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Texture2D" uid="uid://dl1svhnwcws0y" path="res://background.png" id="1_6tdhb"]
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
@@ -34,16 +34,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5vwwp")
 sources/3 = SubResource("TileSetAtlasSource_aojha")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4maxg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4nw5"]
-size = Vector2(6.99203, 20.9985)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nyv2l"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mam1w"]
-size = Vector2(6.26268, 20)
-
 [node name="Map" type="Node2D"]
 script = ExtResource("1_pdvgp")
 metadata/_edit_horizontal_guides_ = []
@@ -57,19 +47,3 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.581, 2.581)
-
-[node name="RightBoundary" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_4maxg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
-position = Vector2(69, 6)
-scale = Vector2(8.032, 8.032)
-shape = SubResource("RectangleShape2D_h4nw5")
-
-[node name="LeftBoundary" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_nyv2l")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
-position = Vector2(-70, 16)
-scale = Vector2(9.365, 9.365)
-shape = SubResource("RectangleShape2D_mam1w")

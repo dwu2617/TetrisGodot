@@ -1,43 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://di3x1dkceollj"]
+[gd_scene load_steps=3 format=3 uid="uid://di3x1dkceollj"]
 
 [ext_resource type="Script" path="res://o_block.gd" id="1_ui2kj"]
 [ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_gk52q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gisye"]
-size = Vector2(14, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0kpw"]
-
-[node name="o_block" type="CharacterBody2D"]
-modulate = Color(1, 1, 0.243137, 1)
+[node name="o_block" type="Sprite2D"]
+modulate = Color(0.843137, 0.976471, 0.431373, 1)
 script = ExtResource("1_ui2kj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_gisye")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_f0kpw")
-
-[node name="TilesTetris8x8" type="Sprite2D" parent="."]
+[node name="Block" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, 4)
 texture = ExtResource("2_gk52q")
 
-[node name="TilesTetris8x9" type="Sprite2D" parent="."]
+[node name="Block2" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-4, 4)
 texture = ExtResource("2_gk52q")
 
-[node name="TilesTetris8x10" type="Sprite2D" parent="."]
+[node name="Block3" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, -4)
 texture = ExtResource("2_gk52q")
 
-[node name="TilesTetris8x11" type="Sprite2D" parent="."]
+[node name="Block4" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-4, -4)
 texture = ExtResource("2_gk52q")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,19 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://e70f5pngcuf"]
+[gd_scene load_steps=3 format=3 uid="uid://e70f5pngcuf"]
 
 [ext_resource type="Script" path="res://block.gd" id="1_lx5gy"]
 [ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="1_skfgg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0rt1"]
-size = Vector2(8, 8)
-
-[node name="Block" type="CharacterBody2D"]
+[node name="Block" type="Sprite2D"]
 script = ExtResource("1_lx5gy")
 
-[node name="TilesTetris8x8" type="Sprite2D" parent="."]
+[node name="Block" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, 4)
 texture = ExtResource("1_skfgg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_a0rt1")
