@@ -6,13 +6,14 @@ var gravity_time = 60/gravity
 var count = 0
 var playing: bool = true
 var y_shift = 8
-var y_increment = 1
 var x_leftBound = -24
 var x_rightBound = 24
+var floorBound: int = 140
 var collision
 var cells = []
 var children = []
 var pivotPoint
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,8 +29,8 @@ func _physics_process(delta):
 	count += 1
 	getCells()
 	if count%gravity_time == 0 && playing:
-		for block in self.get_children():	
-			block.position.y += y_shift*y_increment		
+		shift_y(y_shift)
+		
 	
 	if playing:
 		if Input.is_action_just_pressed("Counterclockwise"):
@@ -46,13 +47,20 @@ func _physics_process(delta):
 			hard_drop()
 		if Input.is_action_just_released("Harddrop"):
 			normal_drop()
-			y_increment = 1
+		playing = !onFloor()
+		
 		
 func getCells():
 	cells = []
 	for block in self.get_children():
 		cells.append(block.position)
 	#print(cells)
+
+func onFloor():
+	for block in children:
+		if block.position.y == floorBound:
+			return true
+	return false
 	
 func getChildren():
 	for block in self.get_children():
@@ -74,10 +82,10 @@ func rotate_block(radians):
 	
 
 func move_left():
-	self.position.x -= 8
+	shift_x(-8)
 			
 func move_right():
-	self.position.x += 8
+	shift_x(8)
 	
 func soft_drop():
 	gravity_time = 15/gravity
@@ -86,13 +94,37 @@ func normal_drop():
 	gravity_time = 60/gravity
 	
 func hard_drop():
-	gravity_time = 2/gravity
-	y_increment *= 5
+	shift_y(floorBound - getLowest())
+	
 				
 func isDone():
 	return !playing
-	
 
+func shift_y(shift):
+	for block in self.get_children():	
+			block.position.y += shift
+func shift_x(shift):
+	for block in self.get_children():	
+			block.position.x += shift
+
+func checkPositions():
+	var position = []
+	for block in self.get_children():	
+		position.append([getX(block),getY(block)])
+	return position
+
+func getX(block):
+	return (block.position.x-4)/8
+	
+func getY(block):
+	return (block.position.y-4)/8
+	
+func getLowest():
+	var lowestBlock = -9999
+	for block in self.get_children():			
+		if block.position.y >= lowestBlock:
+			lowestBlock = block.position.y
+	return lowestBlock
 
 	
 	

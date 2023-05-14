@@ -35,8 +35,10 @@ sources/0 = SubResource("TileSetAtlasSource_5vwwp")
 sources/3 = SubResource("TileSetAtlasSource_aojha")
 
 [node name="Map" type="Node2D"]
+position = Vector2(40, 72)
 script = ExtResource("1_pdvgp")
-metadata/_edit_horizontal_guides_ = []
+metadata/_edit_horizontal_guides_ = [-73.0]
+metadata/_edit_vertical_guides_ = [41.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

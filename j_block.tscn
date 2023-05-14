@@ -5,24 +5,24 @@
 
 [node name="j_block" type="Sprite2D"]
 modulate = Color(0.478431, 0.694118, 1, 1)
-rotation = 1.5708
 script = ExtResource("1_1tkjp")
 
 [node name="Block" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-2.90871e-05, -8)
+position = Vector2(4, 4)
 texture = ExtResource("2_4nvrf")
 
 [node name="Block2" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-4, 4)
 texture = ExtResource("2_4nvrf")
 
 [node name="Block3" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2.86102e-05, 8)
+position = Vector2(-12, -4)
 texture = ExtResource("2_4nvrf")
 
 [node name="Block4" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-7.99997, 8.00003)
+position = Vector2(-12, 4)
 texture = ExtResource("2_4nvrf")

@@ -9,19 +9,20 @@ script = ExtResource("1_2wq3i")
 
 [node name="Block" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(8, 0)
+position = Vector2(4, 4)
 texture = ExtResource("2_3weg2")
 
 [node name="Block2" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-4, 4)
 texture = ExtResource("2_3weg2")
 
 [node name="Block3" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -8)
+position = Vector2(-4, -4)
 texture = ExtResource("2_3weg2")
 
 [node name="Block4" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-8, -8)
+position = Vector2(-12, -4)
 texture = ExtResource("2_3weg2")
