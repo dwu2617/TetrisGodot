@@ -3,6 +3,7 @@ extends Node2D
 var current_block
 var next_block
 var starting_block = true
+var startPos
 var blockPos
 var map = []
 var map_height = 18
@@ -32,17 +33,12 @@ func current(i):
 func initializeMap():
 	for i in range(map_height):
 		map.append(["--", "--","--","--","--","--","--","--","--","--"])
-		i+=1
 
 		
 func updateMap():
-	var blockPos = current_block.checkPositions()
-	var i=0
-	if current_block.isDone()==true:
-		while i < 4:			
-			map[blockPos[i][1]][blockPos[i][0]] = "[]"	
-			i+=1
-		printMap()
+	for i in range(4):		
+		map[blockPos[i][1]][blockPos[i][0]] = "[]"	
+	#printMap()
 
 
 func printMap():
@@ -54,33 +50,18 @@ func printMap():
 		print(row)
 		row = ""
 		i+=1
-		
-			
-
-	
+				
 func initiateBlock():
-	blockPos = Vector2(0,0)
-	current_block.shift_x(40)		
+	startPos = Vector2(0,0)
+	current_block.shift_x(5)		
 
 func onBlock():
-	var blockPos = current_block.checkPositions()
 	for i in range(4):
 		if map[blockPos[i][1]+1][blockPos[i][0]] == "[]":
-			print("yay")
 			return true
 	return false
 			
-func floorBound():
-	var highestFloorBound= 140
-	var blockPos = current_block.checkPositions()
-	for i in range(map_height):
-		for j in range(4):
-			if map[i][blockPos[j][0]] == "[]" and i < highestFloorBound:
-				highestFloorBound = i * 8 - 4
-	return highestFloorBound
-	
-func giveFloorBound():
-	current_block.floorBound = floorBound()
+
 				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,6 +70,7 @@ func _process(delta):
 	
 	if (starting_block || current_block.isDone()==true):
 		if !starting_block:
+			blockPos = current_block.checkPositions()
 			updateMap()
 		if current(block_index) == 'i':
 			current_block = i_block.instantiate()
@@ -116,8 +98,10 @@ func _process(delta):
 		get_tree().get_root().add_child(current_block)
 		count+=1
 		
-		current_block.position = blockPos	
-	giveFloorBound()
+		current_block.position = startPos
+			
+	blockPos = current_block.checkPositions()
+
 	if (starting_block):
 		starting_block = false
 	if (onBlock()):
