@@ -32,7 +32,7 @@ func current(i):
 
 func initializeMap():
 	for i in range(map_height):
-		map.append(["--", "--","--","--","--","--","--","--","--","--"])
+		map.append(["--", "--","--","--","--","--","--","--","--","--", "", ""])
 
 		
 func updateMap():

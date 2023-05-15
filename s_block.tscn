@@ -17,12 +17,12 @@ texture_filter = 1
 position = Vector2(-4, -4)
 texture = ExtResource("2_fkac1")
 
-[node name="Block3" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-4, 4)
-texture = ExtResource("2_fkac1")
-
 [node name="Block4" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-12, 4)
+texture = ExtResource("2_fkac1")
+
+[node name="Block3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4, 4)
 texture = ExtResource("2_fkac1")

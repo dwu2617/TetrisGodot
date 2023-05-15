@@ -28,9 +28,18 @@ func _physics_process(delta):
 		shift_y(1)
 		
 	
-	if playing:
+	actions()
+
+		
+func actions():
+	if playing:		
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
+			checkRotation(PI/2)
+		if Input.is_action_just_pressed("Clockwise"):
+			rotate_block(-PI/2)	
+			checkRotation(PI/2)
+			
 		if Input.is_action_just_pressed("Left"):
 			move_left()
 		if Input.is_action_just_pressed("Right"):
@@ -41,9 +50,7 @@ func _physics_process(delta):
 			normal_drop()
 		if Input.is_action_just_pressed("Harddrop"):
 			hard_drop()
-
 		playing = !onFloor()
-	print(getLowest())
 		
 func getCells():
 	cells = []
@@ -61,19 +68,40 @@ func getChildren():
 	for block in self.get_children():
 		children.append(block)
 		
-		
+func checkRotation(radians):
+	pivotPoint = cells[3]
+	var rotationDisplacement = 0
+	var cosTheta = cos(radians)
+	var sinTheta = sin(radians)
+	var furthestPoint = 4
+
+	for i in range(cells.size()):		
+		var cellPosition = cells[i]
+		var translatedPoint = cellPosition - pivotPoint
+		var rotatedX = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta
+		var rotatedY = translatedPoint.x * sinTheta + translatedPoint.y * cosTheta
+		if (Vector2(rotatedX,rotatedY) + pivotPoint).x<1:
+			if (Vector2(rotatedX,rotatedY) + pivotPoint).x < furthestPoint:
+				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x
+
+		if (Vector2(rotatedX,rotatedY) + pivotPoint).x>9*8+4:
+			if (Vector2(rotatedX,rotatedY) + pivotPoint).x > furthestPoint:
+				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8 
+	rotationDisplacement = -(furthestPoint-4)/8
+	print(rotationDisplacement)
+	shift_x(rotationDisplacement)
+
 func rotate_block(radians):
 	pivotPoint = cells[3]
 	var cosTheta = cos(radians)
 	var sinTheta = sin(radians)
-
 	for i in range(cells.size()):
-		
 		var cellPosition = cells[i]
 		var translatedPoint = cellPosition - pivotPoint
 		var rotatedX = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta
 		var rotatedY = translatedPoint.x * sinTheta + translatedPoint.y * cosTheta
 		children[i].position = Vector2(rotatedX,rotatedY) + pivotPoint
+			
 	
 
 func move_left():
