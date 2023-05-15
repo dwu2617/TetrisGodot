@@ -8,7 +8,10 @@ var blockPos
 var map = []
 var map_height = 18
 var map_width = 10
-var block_stopped = false
+var sdf
+var arr
+var das
+var allTetrominoes = []
 
 
 var block_array = ['i','o','t','s','z','l','j']
@@ -38,7 +41,7 @@ func initializeMap():
 func updateMap():
 	for i in range(4):		
 		map[blockPos[i][1]][blockPos[i][0]] = "[]"	
-	#printMap()
+	printMap()
 
 
 func printMap():
@@ -61,13 +64,44 @@ func onBlock():
 			return true
 	return false
 			
+func getSliderValues():
+	sdf = $Settings.sliderValues[0]		
+	arr = $Settings.sliderValues[1]		
+	das = $Settings.sliderValues[2]		
+	
+func setSettingValues():
+	current_block.sdf = (100-sdf)/5+5
+	current_block.arr = arr/20+1
+	current_block.das = das/20+1
 
+func checkLines():
+	var blockCount = 0;
+	var fullRows = []
+	for i in range(map_height):
+		for j in range(map_width):
+			if map[i][j] == "[]":
+				blockCount +=1 
+		if blockCount == 10:
+			fullRows.append(i)
+
+	return fullRows
+
+func checkRows():
+	for i in checkLines():
+		for tetromino in allTetrominoes:
+			for blocks in tetromino.get_children():
+				if tetromino.getY(blocks) == i:
+					map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
+					blocks.queue_free()
 				
+					
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var block_index = count % 7
-	
+	if block_index == 0: 
+		shuffle_blocks()
 	if (starting_block || current_block.isDone()==true):
 		if !starting_block:
 			blockPos = current_block.checkPositions()
@@ -101,13 +135,21 @@ func _process(delta):
 		current_block.position = startPos
 			
 	blockPos = current_block.checkPositions()
-
+	getSliderValues()
+	allTetrominoes.append(current_block)
+	checkRows()
 	if (starting_block):
 		starting_block = false
+	if !starting_block:		
+		setSettingValues()
+		
 	if (onBlock()):
 		current_block.playing = false
-	
 		
+	
+	
+	
+
 		
 	
 	

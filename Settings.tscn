@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://uqfwmygrabxi"]
+
+[ext_resource type="Script" path="res://Settings.gd" id="1_3k63x"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 848.0
+offset_bottom = 0.213013
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3k63x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SDF" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SDF"
+
+[node name="SDF_Slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="ARR" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "ARR"
+
+[node name="ARR_Slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="DAS" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "DAS"
+
+[node name="DAS_Slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+
+[connection signal="value_changed" from="VBoxContainer/SDF_Slider" to="." method="_on_sdf_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ARR_Slider" to="." method="_on_arr_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/DAS_Slider" to="." method="_on_das_slider_value_changed"]

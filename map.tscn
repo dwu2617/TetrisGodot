@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=8 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Texture2D" uid="uid://dl1svhnwcws0y" path="res://background.png" id="1_6tdhb"]
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
 [ext_resource type="Texture2D" uid="uid://6xfewedjfyjo" path="res://edge.png" id="3_c1ail"]
+[ext_resource type="PackedScene" uid="uid://uqfwmygrabxi" path="res://Settings.tscn" id="4_n60b8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vwwp"]
 texture = ExtResource("1_6tdhb")
@@ -49,3 +50,10 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.581, 2.581)
+
+[node name="Settings" parent="." instance=ExtResource("4_n60b8")]
+texture_filter = 1
+offset_left = 55.0
+offset_top = -75.0
+offset_right = 903.0
+offset_bottom = -74.787

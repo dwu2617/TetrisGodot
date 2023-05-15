@@ -16,3 +16,5 @@ res://t_block.gd
 res://z_block.gd
 res://block.gd
 res://map.gd
+res://Settings.tscn
+res://Settings.gd

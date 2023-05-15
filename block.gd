@@ -1,7 +1,7 @@
 class_name block extends Node2D
 
 
-var gravity = 5
+var gravity = 2
 var gravity_time = 60/gravity
 var count = 0
 var playing: bool = true
@@ -12,6 +12,13 @@ var collision
 var cells = []
 var children = []
 var pivotPoint
+var default = 10
+var arr = 3
+var das = 5
+var dasLeftCount = 0
+var dasRightCount = 0
+var sdf = 10
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,15 +30,14 @@ func _physics_process(delta):
 		for block in self.get_children():
 			children.append(block)
 	count += 1
+	
 	getCells()
 	if count%gravity_time == 0 && playing:
 		shift_y(1)
-		
 	
-	actions()
-
+	actions(count)
 		
-func actions():
+func actions(count):
 	if playing:		
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
@@ -40,10 +46,24 @@ func actions():
 			rotate_block(-PI/2)	
 			checkRotation(PI/2)
 			
-		if Input.is_action_just_pressed("Left"):
-			move_left()
-		if Input.is_action_just_pressed("Right"):
-			move_right()
+		if Input.is_action_pressed("Left"):
+			dasLeftCount +=1
+			dasRightCount = 0
+			if dasLeftCount%int(das) == 0:
+				if count%int(arr) == 0:
+					move_left()
+			else: 
+				if count%default == 0:
+					move_left()
+		if Input.is_action_pressed("Right"):
+			dasRightCount +=1
+			dasLeftCount = 0
+			if dasRightCount%int(das) == 0:
+				if count%int(arr) == 0:
+					move_right()
+			else: 
+				if count%default == 0:
+					move_right()
 		if Input.is_action_pressed("Softdrop"):
 			soft_drop()
 		if Input.is_action_just_released("Softdrop"):
@@ -51,6 +71,7 @@ func actions():
 		if Input.is_action_just_pressed("Harddrop"):
 			hard_drop()
 		playing = !onFloor()
+		#print(sdf)
 		
 func getCells():
 	cells = []
@@ -88,7 +109,6 @@ func checkRotation(radians):
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x > furthestPoint:
 				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8 
 	rotationDisplacement = -(furthestPoint-4)/8
-	print(rotationDisplacement)
 	shift_x(rotationDisplacement)
 
 func rotate_block(radians):
@@ -113,7 +133,7 @@ func move_right():
 		shift_x(1)
 	
 func soft_drop():
-	gravity_time = 15/gravity
+	gravity_time = int(sdf/gravity)
 
 func normal_drop():
 	gravity_time = 60/gravity
