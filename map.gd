@@ -14,6 +14,8 @@ var allTetrominoes = []
 var playing = true
 var tetrominoCount = 0
 var hold
+var firstHold
+var holdPiece
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -28,7 +30,6 @@ var block_index = count%7
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	initializeMap() # Replace with function body.
-	
 	for i in range(4):
 		if current(block_index) == 'i':
 			wait_block = i_block.instantiate()
@@ -133,12 +134,13 @@ func checkRows():
 	if checkLines()!=[]:
 		for i in checkLines():
 			for tetromino in allTetrominoes:
-				for blocks in tetromino.get_children():
-					if tetromino.getY(blocks) == i:
-						map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
-						blocks.queue_free()				
-					elif tetromino.getY(blocks) < i:
-						blocks.position.y +=8
+					for blocks in tetromino.get_children():
+						if tetromino.getY(blocks) == i:
+							map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
+							blocks.queue_free()				
+						elif tetromino.getY(blocks) < i:
+							if tetromino.active == true:
+								blocks.position.y +=8
 			shiftDown(map_height-i)
 				
 func shiftDown(stationary):
@@ -154,11 +156,28 @@ func checkTop():
 func _process(delta):
 	if playing:
 		block_index = count % 7
+		if Input.is_action_just_pressed("Hold"):
+			current_block.active = false
+			current_block.position = Vector2(-50-blockPos[0][0]*8,20-blockPos[0][1]*8)
+			if hold:
+				current_block = allTetrominoes[hold-1]
+				current_block.position = Vector2(0,0)
+				current_block.active = true
+			else: 
+				firstHold = true
+			hold = tetrominoCount - 3
+			
+			
+				
+		
 		if block_index == 0: 
 			shuffle_blocks()
-		if (current_block.isDone()==true):
+		if (current_block.isDone()==true or firstHold):
+			if firstHold:
+				firstHold = false
+			else:
+				updateMap()
 			blockPos = current_block.checkPositions()
-			updateMap()
 			checkTop()
 			if current(block_index) == 'i':
 				wait_block = i_block.instantiate()
@@ -188,7 +207,6 @@ func _process(delta):
 			current_block.shift_x(5)
 			current_block.position = (Vector2(0,0))
 			current_block.active = true
-			get_tree().get_root().add_child(current_block)
 			get_tree().get_root().add_child(wait_block)
 			allTetrominoes.append(wait_block)
 			

@@ -57,3 +57,19 @@ offset_left = 145.0
 offset_top = -76.0
 offset_right = 993.0
 offset_bottom = -75.787
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -110.0
+offset_top = -86.0
+offset_right = -70.0
+offset_bottom = -60.0
+text = "Hold"
+
+[node name="Label2" type="Label" parent="."]
+texture_filter = 1
+offset_left = 57.0
+offset_top = -88.0
+offset_right = 97.0
+offset_bottom = -62.0
+text = "Next"
