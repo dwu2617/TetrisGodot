@@ -66,6 +66,15 @@ offset_right = -70.0
 offset_bottom = -60.0
 text = "Hold"
 
+[node name="Score" type="Label" parent="."]
+texture_filter = 1
+offset_left = -195.0
+offset_top = -85.0
+offset_right = -155.0
+offset_bottom = -59.0
+text = "Score:
+0"
+
 [node name="Label2" type="Label" parent="."]
 texture_filter = 1
 offset_left = 57.0

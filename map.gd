@@ -16,6 +16,8 @@ var tetrominoCount = 0
 var hold
 var firstHold
 var holdPiece
+var score = 0
+var linesCleared
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -131,6 +133,7 @@ func checkLines():
 	return fullRows
 
 func checkRows():
+	linesCleared = 0
 	if checkLines()!=[]:
 		for i in checkLines():
 			for tetromino in allTetrominoes:
@@ -138,9 +141,11 @@ func checkRows():
 						if tetromino.getY(blocks) == i:
 							map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
 							blocks.queue_free()				
+							score += 20 * linesCleared
 						elif tetromino.getY(blocks) < i:
 							if tetromino.active == true:
 								blocks.position.y +=8
+			linesCleared += 1
 			shiftDown(map_height-i)
 				
 func shiftDown(stationary):
@@ -166,16 +171,15 @@ func _process(delta):
 			else: 
 				firstHold = true
 			hold = tetrominoCount - 3
-			
-			
+					
 				
-		
 		if block_index == 0: 
 			shuffle_blocks()
 		if (current_block.isDone()==true or firstHold):
 			if firstHold:
 				firstHold = false
 			else:
+				score += current_block.getLowest()
 				updateMap()
 			blockPos = current_block.checkPositions()
 			checkTop()
@@ -226,6 +230,8 @@ func _process(delta):
 		if (onBlock()):
 			current_block.playing = false
 		current_block.setBoundaries(map)
+		
+		$Score.text = "Score\n" + str(score)
 			
 			
 	
