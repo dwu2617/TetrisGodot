@@ -24,6 +24,7 @@ var done = false
 var doneCounter = 200
 var hardDrop = false
 var map
+var active = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,22 +32,24 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if count == 0:
-		for block in self.get_children():
-			children.append(block)
-	count += 1
 	
-	getCells()
-	if count%gravity_time == 0 && playing:
-		shift_y(1)
-	if !playing:
-		if !hardDrop:
-			doneCounter-=1
-			if doneCounter == 0:
+	
+	if active:
+		if count == 0:
+			for block in self.get_children():
+				children.append(block)
+		count += 1	
+		getCells()
+		if count%gravity_time == 0 && playing:
+			shift_y(1)
+		if !playing:
+			if !hardDrop:
+				doneCounter-=1
+				if doneCounter == 0:
+					done = true
+			else:
 				done = true
-		else:
-			done = true
-	actions(count)
+		actions(count)
 		
 func actions(count):
 	if !done:		

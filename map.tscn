@@ -53,7 +53,7 @@ zoom = Vector2(2.581, 2.581)
 
 [node name="Settings" parent="." instance=ExtResource("4_n60b8")]
 texture_filter = 1
-offset_left = 55.0
-offset_top = -75.0
-offset_right = 903.0
-offset_bottom = -74.787
+offset_left = 145.0
+offset_top = -76.0
+offset_right = 993.0
+offset_bottom = -75.787
