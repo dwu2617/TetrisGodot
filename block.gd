@@ -18,7 +18,12 @@ var das = 5
 var dasLeftCount = 0
 var dasRightCount = 0
 var sdf = 10
-
+var rightBounded = false
+var leftBounded = false
+var done = false
+var doneCounter = 200
+var hardDrop = false
+var map
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,11 +39,17 @@ func _physics_process(delta):
 	getCells()
 	if count%gravity_time == 0 && playing:
 		shift_y(1)
-	
+	if !playing:
+		if !hardDrop:
+			doneCounter-=1
+			if doneCounter == 0:
+				done = true
+		else:
+			done = true
 	actions(count)
 		
 func actions(count):
-	if playing:		
+	if !done:		
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
 			checkRotation(PI/2)
@@ -71,7 +82,7 @@ func actions(count):
 		if Input.is_action_just_pressed("Harddrop"):
 			hard_drop()
 		playing = !onFloor()
-		#print(sdf)
+
 		
 func getCells():
 	cells = []
@@ -104,8 +115,11 @@ func checkRotation(radians):
 		if (Vector2(rotatedX,rotatedY) + pivotPoint).x<1:
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x < furthestPoint:
 				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x
-
-		if (Vector2(rotatedX,rotatedY) + pivotPoint).x>9*8+4:
+		elif map[change((Vector2(rotatedX,rotatedY) + pivotPoint).y)][change((Vector2(rotatedX,rotatedY) + pivotPoint).x)] == "[]":
+			shift_y(-2)
+		elif change((Vector2(rotatedX,rotatedY) + pivotPoint).y)>17:
+			shift_y(-1)
+		if change((Vector2(rotatedX,rotatedY) + pivotPoint).x)>9:
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x > furthestPoint:
 				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8 
 	rotationDisplacement = -(furthestPoint-4)/8
@@ -125,11 +139,11 @@ func rotate_block(radians):
 	
 
 func move_left():
-	if getLeft() > 0:
+	if getLeft() > 0 and leftBounded == false:
 		shift_x(-1)
 			
 func move_right():
-	if getRight() < 9:
+	if getRight() < 9 and rightBounded == false:
 		shift_x(1)
 	
 func soft_drop():
@@ -139,10 +153,12 @@ func normal_drop():
 	gravity_time = 60/gravity
 	
 func hard_drop():	
+	hardDrop = true
 	gravity_time = 1
+	
 				
 func isDone():
-	return !playing
+	return done
 
 func shift_y(shift):
 	for block in self.get_children():	
@@ -171,20 +187,33 @@ func getLowest():
 	return lowestBlock 
 	
 func getLeft():
-	var leftBlock = 9999
+	var left = 9999
 	for block in self.get_children():			
-		if getX(block) <= leftBlock:
-			leftBlock = getX(block)
-	return leftBlock
+		if getX(block) <= left:
+			left = getX(block)
+	return left
 	
 func getRight():
-	var rightBlock = -9999
+	var right = -9999
 	for block in self.get_children():			
-		if getX(block) >= rightBlock:
-			rightBlock = getX(block)
-	return rightBlock
+		if getX(block) >= right:
+			right = getX(block)
+	return right
 
 	
+func setBoundaries(mapArray):
+	rightBounded = false
+	leftBounded = false
+	for block in self.get_children():	
+		if mapArray[getY(block)][getX(block)-1] == "[]":
+			leftBounded = true
+		if mapArray[getY(block)][getX(block)+1] == "[]":
+			rightBounded = true
+	map = mapArray
+
+func change(value):
+	return(value-4)/8
+		
 	
 		
 	

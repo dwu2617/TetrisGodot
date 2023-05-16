@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func actions(count):
-	if playing:
+	if !done:
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
 			checkRotation(PI/2)

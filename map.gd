@@ -12,7 +12,8 @@ var sdf
 var arr
 var das
 var allTetrominoes = []
-
+var playing = true
+var block_index
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -26,6 +27,7 @@ var count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	initializeMap() # Replace with function body.
+	
 
 func shuffle_blocks():
 	block_array.shuffle()
@@ -34,7 +36,7 @@ func current(i):
 	return block_array[i]
 
 func initializeMap():
-	for i in range(map_height):
+	for i in range(map_height+1):
 		map.append(["--", "--","--","--","--","--","--","--","--","--", "", ""])
 
 		
@@ -53,6 +55,7 @@ func printMap():
 		print(row)
 		row = ""
 		i+=1
+	print()
 				
 func initiateBlock():
 	startPos = Vector2(0,0)
@@ -83,69 +86,86 @@ func checkLines():
 				blockCount +=1 
 		if blockCount == 10:
 			fullRows.append(i)
+			blockCount = 0
+		else:
+			blockCount = 0
 
 	return fullRows
 
 func checkRows():
-	for i in checkLines():
-		for tetromino in allTetrominoes:
-			for blocks in tetromino.get_children():
-				if tetromino.getY(blocks) == i:
-					map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
-					blocks.queue_free()
+	if checkLines()!=[]:
+		for i in checkLines():
+			for tetromino in allTetrominoes:
+				for blocks in tetromino.get_children():
+					if tetromino.getY(blocks) == i:
+						map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
+						blocks.queue_free()				
+					elif tetromino.getY(blocks) < i:
+						blocks.position.y +=8
+			shiftDown(map_height-i)
 				
-					
+func shiftDown(stationary):
+	for i in range(map_height-stationary):
+		if map_height-i-stationary -1== 0:
+			map[map_height-i-stationary-1] = ["--", "--","--","--","--","--","--","--","--","--", "", ""]
+		else: map[map_height-i-stationary] = map[map_height-i-stationary-1]				
 		
-
+func checkTop():
+	if blockPos[0][1] < 0:
+		playing=false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var block_index = count % 7
-	if block_index == 0: 
-		shuffle_blocks()
-	if (starting_block || current_block.isDone()==true):
-		if !starting_block:
-			blockPos = current_block.checkPositions()
-			updateMap()
-		if current(block_index) == 'i':
-			current_block = i_block.instantiate()
-			
-		elif current(block_index) == 'o':
-			current_block = o_block.instantiate()
-			
-		elif current(block_index) == 't':
-			current_block = t_block.instantiate()
+	if playing:
+		block_index = count % 7
+		if block_index == 0: 
+			shuffle_blocks()
+		if (starting_block || current_block.isDone()==true):
+			if !starting_block:
+				blockPos = current_block.checkPositions()
+				updateMap()
+				checkTop()
+			if current(block_index) == 'i':
+				current_block = i_block.instantiate()
+				
+			elif current(block_index) == 'o':
+				current_block = o_block.instantiate()
+				
+			elif current(block_index) == 't':
+				current_block = t_block.instantiate()
 
-		elif current(block_index) == 's':
-			current_block = s_block.instantiate()
+			elif current(block_index) == 's':
+				current_block = s_block.instantiate()
 
-		elif current(block_index) == 'z':
-			current_block = z_block.instantiate()
+			elif current(block_index) == 'z':
+				current_block = z_block.instantiate()
 
-		elif current(block_index) == 'l':
-			current_block = l_block.instantiate()
+			elif current(block_index) == 'l':
+				current_block = l_block.instantiate()
 
-		elif current(block_index) == 'j':
-			current_block = j_block.instantiate()
+			elif current(block_index) == 'j':
+				current_block = j_block.instantiate()
+				
+			initiateBlock()
 			
-		initiateBlock()
-		
-		get_tree().get_root().add_child(current_block)
-		count+=1
-		
-		current_block.position = startPos
+			get_tree().get_root().add_child(current_block)
+			count+=1
 			
-	blockPos = current_block.checkPositions()
-	getSliderValues()
-	allTetrominoes.append(current_block)
-	checkRows()
-	if (starting_block):
-		starting_block = false
-	if !starting_block:		
-		setSettingValues()
-		
-	if (onBlock()):
-		current_block.playing = false
-		
+			current_block.position = startPos
+			allTetrominoes.append(current_block)
+			checkRows()
+				
+		blockPos = current_block.checkPositions()
+		getSliderValues()
+		if (starting_block):
+			starting_block = false
+		if !starting_block:		
+			setSettingValues()
+			
+		if (onBlock()):
+			current_block.playing = false
+		current_block.setBoundaries(map)
+			
+			
 	
 	
 	
