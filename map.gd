@@ -32,6 +32,7 @@ var block_index = count%7
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	initializeMap() # Replace with function body.
+	shuffle_blocks()
 	for i in range(4):
 		if current(block_index) == 'i':
 			wait_block = i_block.instantiate()
@@ -140,11 +141,12 @@ func checkRows():
 					for blocks in tetromino.get_children():
 						if tetromino.getY(blocks) == i:
 							map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
-							blocks.queue_free()				
+							tetromino.clear(blocks)							
+											
 							score += 20 * linesCleared
 						elif tetromino.getY(blocks) < i:
 							if tetromino.active == true:
-								blocks.position.y +=8
+								tetromino.move(blocks)
 			linesCleared += 1
 			shiftDown(map_height-i)
 				

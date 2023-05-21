@@ -1,9 +1,11 @@
+VideoStreamPlayer
+AnimatedSprite2D
+Sprite2D
 Label
 HSlider
 Button
 HBoxContainer
 VBoxContainer
-Sprite2D
 GridContainer
 CharacterBody2D
 RigidBody2D

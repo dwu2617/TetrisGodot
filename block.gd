@@ -216,7 +216,15 @@ func setBoundaries(mapArray):
 
 func change(value):
 	return(value-4)/8
-		
+	
+func clear(block):
+	block.play("clear")
+	await get_tree().create_timer(0.2).timeout
+	block.queue_free()	
+	
+func move(block):
+	await get_tree().create_timer(0.1).timeout
+	block.position.y +=8
 	
 		
 	

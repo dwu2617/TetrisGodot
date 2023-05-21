@@ -1,29 +1,76 @@
-[gd_scene load_steps=3 format=3 uid="uid://dux6chgrh2506"]
+[gd_scene load_steps=9 format=3 uid="uid://dux6chgrh2506"]
 
 [ext_resource type="Script" path="res://l_block.gd" id="1_lnyts"]
-[ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_fl8wd"]
+[ext_resource type="Texture2D" uid="uid://3ih7q0835dj1" path="res://tile_animation.png" id="2_2jq42"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta3xi"]
+atlas = ExtResource("2_2jq42")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4q28"]
+atlas = ExtResource("2_2jq42")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjj7j"]
+atlas = ExtResource("2_2jq42")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiqvl"]
+atlas = ExtResource("2_2jq42")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfubr"]
+atlas = ExtResource("2_2jq42")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e47ha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta3xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4q28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjj7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yiqvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfubr")
+}],
+"loop": false,
+"name": &"clear",
+"speed": 20.0
+}]
 
 [node name="l_block" type="Sprite2D"]
 modulate = Color(0.956863, 0.701961, 0.380392, 1)
 texture_filter = 1
 script = ExtResource("1_lnyts")
 
-[node name="Block3" type="Sprite2D" parent="."]
+[node name="Block3" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-12, 4)
-texture = ExtResource("2_fl8wd")
+sprite_frames = SubResource("SpriteFrames_e47ha")
+animation = &"clear"
 
-[node name="Block4" type="Sprite2D" parent="."]
+[node name="Block4" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, -4)
-texture = ExtResource("2_fl8wd")
+sprite_frames = SubResource("SpriteFrames_e47ha")
+animation = &"clear"
 
-[node name="Block" type="Sprite2D" parent="."]
+[node name="Block5" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, 4)
-texture = ExtResource("2_fl8wd")
+sprite_frames = SubResource("SpriteFrames_e47ha")
+animation = &"clear"
 
-[node name="Block2" type="Sprite2D" parent="."]
+[node name="Block6" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-4, 4)
-texture = ExtResource("2_fl8wd")
+sprite_frames = SubResource("SpriteFrames_e47ha")
+animation = &"clear"
