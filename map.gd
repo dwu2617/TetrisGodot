@@ -57,7 +57,7 @@ func _ready():
 					
 		if i!=0:
 			get_tree().get_root().add_child.call_deferred(wait_block)
-			wait_block.position = Vector2(120,count*50-30)
+			wait_block.position = Vector2(120,count*30+10)
 		allTetrominoes.append(wait_block)
 		count+=1
 		tetrominoCount+=1
@@ -165,7 +165,7 @@ func _process(delta):
 		block_index = count % 7
 		if Input.is_action_just_pressed("Hold"):
 			current_block.active = false
-			current_block.position = Vector2(-50-blockPos[0][0]*8,20-blockPos[0][1]*8)
+			current_block.position = Vector2(-50-blockPos[0][0]*8,40-blockPos[0][1]*8)
 			if hold:
 				current_block = allTetrominoes[hold-1]
 				current_block.position = Vector2(0,0)
@@ -208,7 +208,7 @@ func _process(delta):
 							
 
 			allTetrominoes[tetrominoCount-1].position = (Vector2(120,70))
-			allTetrominoes[tetrominoCount-2].position = (Vector2(120,20))
+			allTetrominoes[tetrominoCount-2].position = (Vector2(120,40))
 			current_block = allTetrominoes[tetrominoCount-3]
 			current_block.shift_x(5)
 			current_block.position = (Vector2(0,0))
@@ -218,7 +218,7 @@ func _process(delta):
 			
 
 				
-			wait_block.position = (Vector2(120,120))
+			wait_block.position = (Vector2(120,100))
 			count+=1		
 			
 			

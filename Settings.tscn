@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Settings.gd" id="1_3k63x"]
 
 [node name="Control" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,11 +16,13 @@ script = ExtResource("1_3k63x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 92.0
+offset_bottom = 193.0
+scale = Vector2(0.354, 0.354)
 
 [node name="SDF" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 100
 text = "SDF"
 
 [node name="SDF_Slider" type="HSlider" parent="VBoxContainer"]
@@ -28,6 +31,7 @@ focus_mode = 0
 
 [node name="ARR" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 100
 text = "ARR"
 
 [node name="ARR_Slider" type="HSlider" parent="VBoxContainer"]
@@ -36,6 +40,7 @@ focus_mode = 0
 
 [node name="DAS" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 100
 text = "DAS"
 
 [node name="DAS_Slider" type="HSlider" parent="VBoxContainer"]

@@ -26,6 +26,7 @@ var hardDrop = false
 var map
 var active = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -223,7 +224,7 @@ func clear(block):
 	block.queue_free()	
 	
 func move(block):
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.19).timeout
 	block.position.y +=8
 	
 		
