@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=6 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
 [ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_dxcve"]
 [ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="4_n60b8"]
+[ext_resource type="PackedScene" uid="uid://bupmcbunu1obe" path="res://shadow_piece.tscn" id="5_676l0"]
 [ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_rhhy1"]
 
 [node name="Map" type="Node2D"]
@@ -58,3 +59,6 @@ text = "Next"
 position = Vector2(0, 8.0695)
 scale = Vector2(0.506848, 0.502707)
 texture = ExtResource("5_rhhy1")
+
+[node name="ShadowPiece" parent="." instance=ExtResource("5_676l0")]
+position = Vector2(-40, -72)

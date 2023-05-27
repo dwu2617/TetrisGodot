@@ -11,6 +11,7 @@ var sdf
 var arr
 var das
 var allTetrominoes = []
+var bottom = []
 var playing = true
 var tetrominoCount = 0
 var hold
@@ -160,7 +161,48 @@ func checkTop():
 	if blockPos[0][1] < 0:
 		playing=false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+
+func getBottom():
+	bottom = []
+	var bottomReached
+	for i in range(map_width):
+		bottomReached = false
+		for j in range(map_height):
+			if map[j][i] == "[]" and bottomReached == false:
+				bottom.append(j)
+				bottomReached = true
+		if bottomReached == false:
+			bottom.append(map_height)
+	return bottom
+	
+func moveShadow():
+	var column 
+	var row
+	var y_shift = getShadowShift()
+	var i = -1
+	for block in current_block.get_children():
+		i+=1
+		column = current_block.getX(block)
+		row = current_block.getY(block)
+		$ShadowPiece.block(i).position = Vector2(column*8+4,(row+y_shift-1)*8+4)
+
+		
+		
+func getShadowShift():
+	var column
+	var i = -1
+	var y_shift = 1000
+	for block in current_block.get_children():
+		i+=1
+		column = current_block.getX(block)
+		$ShadowPiece.block(i).position = Vector2(column*8+4,0)
+		if bottom[column] - current_block.getY(block) < y_shift:
+			y_shift = bottom[column] - current_block.getY(block)
+			print(y_shift)
+	return y_shift
+	
+	
+func _process(delta): 
 	if playing:
 		block_index = count % 7
 		if Input.is_action_just_pressed("Hold"):
@@ -234,6 +276,9 @@ func _process(delta):
 		current_block.setBoundaries(map)
 		
 		$Score.text = "Score\n" + str(score)
+		
+		getBottom()
+		moveShadow()
 			
 			
 	

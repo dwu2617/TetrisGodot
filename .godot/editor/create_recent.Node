@@ -1,9 +1,9 @@
+Sprite2D
 Label
 Button
 VBoxContainer
 VideoStreamPlayer
 AnimatedSprite2D
-Sprite2D
 HSlider
 HBoxContainer
 GridContainer

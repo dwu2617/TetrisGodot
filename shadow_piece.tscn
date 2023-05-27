@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bupmcbunu1obe"]
+
+[ext_resource type="Script" path="res://shadow_piece.gd" id="1_dx5xt"]
+[ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_gcxpg"]
+
+[node name="ShadowPiece" type="Sprite2D"]
+modulate = Color(0.156863, 0.156863, 0.156863, 0.768627)
+script = ExtResource("1_dx5xt")
+
+[node name="Block" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("2_gcxpg")
+
+[node name="Block2" type="Sprite2D" parent="."]
+position = Vector2(-12, 4)
+texture = ExtResource("2_gcxpg")
+
+[node name="Block3" type="Sprite2D" parent="."]
+position = Vector2(-4, 4)
+texture = ExtResource("2_gcxpg")
+
+[node name="Block4" type="Sprite2D" parent="."]
+position = Vector2(12, 4)
+texture = ExtResource("2_gcxpg")

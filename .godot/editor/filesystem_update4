@@ -11,4 +11,6 @@ res://Settings.tscn
 res://start.tscn
 res://starting_screen.tscn
 res://map.gd
-res://starting_screen.gd
+res://shadow_piece.tscn
+res://shadow_piece.gd
+res://Settings.gd

@@ -34,14 +34,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
-	
 	if active:
 		if count == 0:
 			for block in self.get_children():
 				children.append(block)
 		count += 1	
 		getCells()
-		if count%gravity_time == 0 && playing:
+		if count%gravity_time == 0 && playing && !hardDrop:
 			shift_y(1)
 		if !playing:
 			if !hardDrop:
@@ -156,9 +155,12 @@ func soft_drop():
 func normal_drop():
 	gravity_time = 60/gravity
 	
-func hard_drop():	
+func hard_drop():
 	hardDrop = true
-	gravity_time = 1
+	while (playing):
+		shift_y(1)
+		await get_tree().create_timer(0.001).timeout
+
 	
 				
 func isDone():
