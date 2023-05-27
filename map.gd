@@ -116,8 +116,8 @@ func getSliderValues():
 	
 func setSettingValues():
 	current_block.sdf = (100-sdf)/5+5
-	current_block.arr = arr/20+1
-	current_block.das = das/20+1
+	current_block.arr = arr
+	current_block.das = das/8+1
 
 func checkLines():
 	var blockCount = 0;
@@ -197,7 +197,9 @@ func getShadowShift():
 		column = current_block.getX(block)
 		if bottom[column] - current_block.getY(block) < y_shift:
 			y_shift = bottom[column] - current_block.getY(block)
-			print(y_shift)
+			#print(y_shift)
+	if y_shift < 0:
+		return 1
 	return y_shift
 	
 	
@@ -210,11 +212,12 @@ func _process(delta):
 			if hold:
 				current_block = allTetrominoes[hold-1]
 				current_block.position = Vector2(0,0)
+				current_block.reset()
+				current_block.shift_x(5)
 				current_block.active = true
 			else: 
 				firstHold = true
-			hold = tetrominoCount - 3
-					
+			hold = tetrominoCount - 3					
 				
 		if block_index == 0: 
 			shuffle_blocks()
@@ -255,13 +258,10 @@ func _process(delta):
 			current_block.position = (Vector2(0,0))
 			current_block.active = true
 			get_tree().get_root().add_child(wait_block)
-			allTetrominoes.append(wait_block)
-			
-
+			allTetrominoes.append(wait_block)		
 				
 			wait_block.position = (Vector2(120,100))
-			count+=1		
-			
+			count+=1					
 			
 			tetrominoCount+=1
 			checkRows()

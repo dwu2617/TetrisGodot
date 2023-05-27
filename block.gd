@@ -26,7 +26,8 @@ var hardDrop = false
 var map
 var active = false
 var bottom
-
+var initialPos
+var initial = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +35,9 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
+	if initial:
+		initialPos = checkPositions()
+		initial = false
 	if active:
 		if count == 0:
 			for block in self.get_children():
@@ -52,6 +55,7 @@ func _physics_process(delta):
 				done = true
 		actions(count)
 		
+		
 func actions(count):
 	if !done:		
 		if Input.is_action_just_pressed("Counterclockwise"):
@@ -60,25 +64,23 @@ func actions(count):
 		if Input.is_action_just_pressed("Clockwise"):
 			rotate_block(-PI/2)	
 			checkRotation(PI/2)
-			
-		if Input.is_action_pressed("Left"):
+		if Input.is_action_just_pressed("Left"):
+			move_left()	
+		elif Input.is_action_pressed("Left"):
 			dasLeftCount +=1
 			dasRightCount = 0
 			if dasLeftCount%int(das) == 0:
-				if count%int(arr) == 0:
+				for i in range(int(arr)):
 					move_left()
-			else: 
-				if count%default == 0:
-					move_left()
+		if Input.is_action_just_pressed("Right"):
+			move_right()				
 		if Input.is_action_pressed("Right"):
 			dasRightCount +=1
 			dasLeftCount = 0
 			if dasRightCount%int(das) == 0:
-				if count%int(arr) == 0:
+				for i in range(int(arr)):
 					move_right()
-			else: 
-				if count%default == 0:
-					move_right()
+					
 		if Input.is_action_pressed("Softdrop"):
 			soft_drop()
 		if Input.is_action_just_released("Softdrop"):
@@ -143,10 +145,12 @@ func rotate_block(radians):
 	
 
 func move_left():
+	checkBoundaries()
 	if getLeft() > 0 and leftBounded == false:
 		shift_x(-1)
 			
 func move_right():
+	checkBoundaries()
 	if getRight() < 9 and rightBounded == false:
 		shift_x(1)
 	
@@ -225,18 +229,30 @@ func setBoundaries(mapArray, bottomArray):
 	map = mapArray
 	bottom = bottomArray
 
+func checkBoundaries():
+	for block in self.get_children():	
+		if map[getY(block)][getX(block)-1] == "[]":
+			leftBounded = true
+		if map[getY(block)][getX(block)+1] == "[]":
+			rightBounded = true
 func change(value):
 	return(value-4)/8
 	
 func clear(block):
 	block.play("clear")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.05).timeout
 	block.queue_free()	
 	
 func move(block):
-	await get_tree().create_timer(0.19).timeout
+	await get_tree().create_timer(0.02).timeout
 	block.position.y +=8
 	
+func reset():
+	var i = 0
+	for block in children:
+		block.position.x = initialPos[i][0]*8+4
+		block.position.y = initialPos[i][1]*8+4
+		i+=1
 		
 	
 		

@@ -20,23 +20,21 @@ func actions(count):
 		if Input.is_action_just_pressed("180"):
 			rotate_block(PI)
 			checkRotation(PI/2)		
-		if Input.is_action_pressed("Left"):
+		if Input.is_action_just_pressed("Left"):
+			move_left()	
+		elif Input.is_action_pressed("Left"):
 			dasLeftCount +=1
 			dasRightCount = 0
 			if dasLeftCount%int(das) == 0:
-				if count%int(arr) == 0:
+				for i in range(int(arr)):
 					move_left()
-			else: 
-				if count%default == 0:
-					move_left()
+		if Input.is_action_just_pressed("Right"):
+			move_right()				
 		if Input.is_action_pressed("Right"):
 			dasRightCount +=1
 			dasLeftCount = 0
 			if dasRightCount%int(das) == 0:
-				if count%int(arr) == 0:
-					move_right()
-			else: 
-				if count%default == 0:
+				for i in range(int(arr)):
 					move_right()
 		if Input.is_action_pressed("Softdrop"):
 			soft_drop()

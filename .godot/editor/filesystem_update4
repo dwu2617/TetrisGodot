@@ -15,3 +15,6 @@ res://shadow_piece.tscn
 res://shadow_piece.gd
 res://Settings.gd
 res://block.gd
+res://j_block.gd
+res://l_block.gd
+res://t_block.gd
