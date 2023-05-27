@@ -25,6 +25,7 @@ var doneCounter = 200
 var hardDrop = false
 var map
 var active = false
+var bottom
 
 
 # Called when the node enters the scene tree for the first time.
@@ -156,10 +157,16 @@ func normal_drop():
 	gravity_time = 60/gravity
 	
 func hard_drop():
+	var y_shift = 1000
+	var column
 	hardDrop = true
-	while (playing):
-		shift_y(1)
-		await get_tree().create_timer(0.001).timeout
+	for block in children:
+		column = getX(block)
+		if bottom[column] - getY(block) < y_shift:
+			y_shift = bottom[column] - getY(block)
+	if y_shift > 0:
+		shift_y(y_shift-1)
+
 
 	
 				
@@ -207,7 +214,7 @@ func getRight():
 	return right
 
 	
-func setBoundaries(mapArray):
+func setBoundaries(mapArray, bottomArray):
 	rightBounded = false
 	leftBounded = false
 	for block in self.get_children():	
@@ -216,6 +223,7 @@ func setBoundaries(mapArray):
 		if mapArray[getY(block)][getX(block)+1] == "[]":
 			rightBounded = true
 	map = mapArray
+	bottom = bottomArray
 
 func change(value):
 	return(value-4)/8

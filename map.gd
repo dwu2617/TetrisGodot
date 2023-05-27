@@ -195,7 +195,6 @@ func getShadowShift():
 	for block in current_block.get_children():
 		i+=1
 		column = current_block.getX(block)
-		$ShadowPiece.block(i).position = Vector2(column*8+4,0)
 		if bottom[column] - current_block.getY(block) < y_shift:
 			y_shift = bottom[column] - current_block.getY(block)
 			print(y_shift)
@@ -273,7 +272,7 @@ func _process(delta):
 			
 		if (onBlock()):
 			current_block.playing = false
-		current_block.setBoundaries(map)
+		current_block.setBoundaries(map, bottom)
 		
 		$Score.text = "Score\n" + str(score)
 		
