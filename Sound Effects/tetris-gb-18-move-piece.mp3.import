@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdix5s7f5q6lb"
+path="res://.godot/imported/tetris-gb-18-move-piece.mp3-b87306f6580ccd6197d44814fdde7d7a.mp3str"
+
+[deps]
+
+source_file="res://Sound Effects/tetris-gb-18-move-piece.mp3"
+dest_files=["res://.godot/imported/tetris-gb-18-move-piece.mp3-b87306f6580ccd6197d44814fdde7d7a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

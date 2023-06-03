@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=9 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
 [ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_dxcve"]
+[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="3_0c60k"]
 [ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="4_n60b8"]
 [ext_resource type="PackedScene" uid="uid://bupmcbunu1obe" path="res://shadow_piece.tscn" id="5_676l0"]
 [ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_rhhy1"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="6_byytl"]
+[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="7_uhuwn"]
 
 [node name="Map" type="Node2D"]
 position = Vector2(40, 72)
@@ -16,6 +19,12 @@ metadata/_edit_vertical_guides_ = [41.0]
 position = Vector2(-6, 4)
 scale = Vector2(0.213, 0.213)
 texture = ExtResource("2_dxcve")
+
+[node name="GameBackground2" type="Sprite2D" parent="."]
+modulate = Color(1, 0.686275, 0.196078, 0.223529)
+position = Vector2(-3.74999, 2.24999)
+scale = Vector2(0.549, 0.415567)
+texture = ExtResource("3_0c60k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4.274, 4.274)
@@ -62,3 +71,12 @@ texture = ExtResource("5_rhhy1")
 
 [node name="ShadowPiece" parent="." instance=ExtResource("5_676l0")]
 position = Vector2(-40, -72)
+
+[node name="Background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_byytl")
+autoplay = true
+
+[node name="Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_uhuwn")
+
+[node name="PieceEffects" type="AudioStreamPlayer" parent="."]

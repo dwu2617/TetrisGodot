@@ -2,7 +2,7 @@ extends Control
 
 var sliderValues = [0,0,0]
 var sdf = 100
-var arr = 10
+var arr = 100
 var das = 60
 # Called when the node enters the scene tree for the first time.
 func _ready():

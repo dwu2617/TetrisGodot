@@ -28,6 +28,11 @@ var active = false
 var bottom
 var initialPos
 var initial = true
+var pieceEffect = null
+var move_piece = preload("res://Sound Effects/tetris-gb-18-move-piece.mp3")
+var rotate_piece = preload("res://Sound Effects/tetris-gb-19-rotate-piece.mp3")
+var landed_piece = preload("res://Sound Effects/tetris-gb-27-piece-landed.mp3")
+var can180 = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,17 +59,19 @@ func _physics_process(delta):
 			else:
 				done = true
 		actions(count)
-		
+	
 		
 func actions(count):
 	if !done:		
+		pieceEffect = null
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
 			checkRotation(PI/2)
-		if Input.is_action_just_pressed("Clockwise"):
+		elif Input.is_action_just_pressed("Clockwise"):
 			rotate_block(-PI/2)	
 			checkRotation(PI/2)
 		if Input.is_action_just_pressed("Left"):
+			pieceEffect = move_piece
 			move_left()	
 		elif Input.is_action_pressed("Left"):
 			dasLeftCount +=1
@@ -73,14 +80,19 @@ func actions(count):
 				for i in range(int(arr)):
 					move_left()
 		if Input.is_action_just_pressed("Right"):
+			pieceEffect = move_piece
 			move_right()				
-		if Input.is_action_pressed("Right"):
+		elif Input.is_action_pressed("Right"):
+			
 			dasRightCount +=1
 			dasLeftCount = 0
 			if dasRightCount%int(das) == 0:
 				for i in range(int(arr)):
 					move_right()
-					
+		if can180 == true:
+			if Input.is_action_just_pressed("180"):
+				rotate_block(PI)
+				checkRotation(PI/2)					
 		if Input.is_action_pressed("Softdrop"):
 			soft_drop()
 		if Input.is_action_just_released("Softdrop"):
@@ -88,6 +100,8 @@ func actions(count):
 		if Input.is_action_just_pressed("Harddrop"):
 			hard_drop()
 		playing = !onFloor()
+	else:
+		pieceEffect = landed_piece
 
 		
 func getCells():
@@ -141,6 +155,7 @@ func rotate_block(radians):
 		var rotatedX = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta
 		var rotatedY = translatedPoint.x * sinTheta + translatedPoint.y * cosTheta
 		children[i].position = Vector2(rotatedX,rotatedY) + pivotPoint
+	pieceEffect = rotate_piece
 			
 	
 
@@ -171,8 +186,6 @@ func hard_drop():
 	if y_shift > 0:
 		shift_y(y_shift-1)
 
-
-	
 				
 func isDone():
 	return done
@@ -235,6 +248,7 @@ func checkBoundaries():
 			leftBounded = true
 		if map[getY(block)][getX(block)+1] == "[]":
 			rightBounded = true
+			
 func change(value):
 	return(value-4)/8
 	

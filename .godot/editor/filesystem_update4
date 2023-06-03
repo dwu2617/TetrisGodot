@@ -1,5 +1,6 @@
 res://map.tscn
 res://block.tscn
+res://shadow_piece.tscn
 res://i_block.tscn
 res://t_block.tscn
 res://l_block.tscn
@@ -11,10 +12,7 @@ res://Settings.tscn
 res://start.tscn
 res://starting_screen.tscn
 res://map.gd
-res://shadow_piece.tscn
-res://shadow_piece.gd
-res://Settings.gd
 res://block.gd
-res://j_block.gd
 res://l_block.gd
+res://j_block.gd
 res://t_block.gd

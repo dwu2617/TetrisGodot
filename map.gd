@@ -19,6 +19,10 @@ var firstHold
 var holdPiece
 var score = 0
 var linesCleared
+var canHold = true
+var firstBlock
+var line_clear = preload("res://Sound Effects/tetris-gb-21-line-clear.mp3")
+var tetris_clear = preload("res://Sound Effects/tetris-gb-22-tetris-4-lines.mp3")
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -64,11 +68,12 @@ func _ready():
 		tetrominoCount+=1
 		block_index = count%7
 	current_block = allTetrominoes[0]
-	current_block.position = Vector2(0,0)
 	current_block.shift_x(5)
+	current_block.position = Vector2(0,0)
 	get_tree().get_root().add_child.call_deferred(current_block)
 	current_block.active=true
-	
+	firstBlock = true
+
 	
 
 func shuffle_blocks():
@@ -150,6 +155,12 @@ func checkRows():
 								tetromino.move(blocks)
 			linesCleared += 1
 			shiftDown(map_height-i)
+		if linesCleared < 4:
+			$Effects.stream = line_clear
+			$Effects.play()
+		else:
+			$Effects.stream = tetris_clear
+			$Effects.play()
 				
 func shiftDown(stationary):
 	for i in range(map_height-stationary):
@@ -195,29 +206,42 @@ func getShadowShift():
 	for block in current_block.get_children():
 		i+=1
 		column = current_block.getX(block)
-		if bottom[column] - current_block.getY(block) < y_shift:
-			y_shift = bottom[column] - current_block.getY(block)
-			#print(y_shift)
+		if column < 10:
+			if bottom[column] - current_block.getY(block) < y_shift:
+				y_shift = bottom[column] - current_block.getY(block)
+				#print(y_shift)
 	if y_shift < 0:
 		return 1
 	return y_shift
 	
 	
 func _process(delta): 
+	if !$Background.is_playing():
+		$Background.play()
+		
 	if playing:
+		if current_block.pieceEffect != null:
+			$PieceEffects.stream = current_block.pieceEffect
+			$PieceEffects.play()
+	
+	
 		block_index = count % 7
-		if Input.is_action_just_pressed("Hold"):
-			current_block.active = false
-			current_block.position = Vector2(-50-blockPos[0][0]*8,40-blockPos[0][1]*8)
-			if hold:
-				current_block = allTetrominoes[hold-1]
-				current_block.position = Vector2(0,0)
-				current_block.reset()
-				current_block.shift_x(5)
-				current_block.active = true
-			else: 
-				firstHold = true
-			hold = tetrominoCount - 3					
+		if canHold:
+			if Input.is_action_just_pressed("Hold"):
+				current_block.active = false
+				current_block.position = Vector2(-50-blockPos[0][0]*8,40-blockPos[0][1]*8)
+				if hold:
+					current_block = allTetrominoes[hold-1]
+					current_block.position = Vector2(0,0)
+					current_block.reset()
+					current_block.shift_x(5)
+					current_block.active = true
+					if firstBlock:
+						current_block.shift_x(-5)
+						firstBlock = false
+				else: 
+					firstHold = true
+				hold = tetrominoCount - 3					
 				
 		if block_index == 0: 
 			shuffle_blocks()

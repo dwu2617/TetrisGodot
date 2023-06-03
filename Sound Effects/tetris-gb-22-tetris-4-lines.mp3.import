@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bl4kj00ursjb1"
+path="res://.godot/imported/tetris-gb-22-tetris-4-lines.mp3-65cdf65a4566a845367718c68ffc95d1.mp3str"
+
+[deps]
+
+source_file="res://Sound Effects/tetris-gb-22-tetris-4-lines.mp3"
+dest_files=["res://.godot/imported/tetris-gb-22-tetris-4-lines.mp3-65cdf65a4566a845367718c68ffc95d1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
