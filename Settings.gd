@@ -3,7 +3,10 @@ extends Control
 var sliderValues = [0,0,0]
 var sdf = 100
 var arr = 100
-var das = 60
+var das = 50
+var paused = false
+var resume
+var restart = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -23,3 +26,21 @@ func _on_das_slider_value_changed(value):
 	das = value
 
 
+func _on_resume_pressed():
+	paused = false
+	resume = true
+	get_tree().paused = false
+	
+
+func _on_my_controls_pressed():
+	sdf = 100
+	arr = 100
+	das = 50
+
+func _on_exit_pressed():
+	get_tree().quit()
+
+
+func _on_restart_pressed():
+	get_tree().paused = false
+	restart = true

@@ -20,9 +20,10 @@ var holdPiece
 var score = 0
 var linesCleared
 var canHold = true
-var firstBlock
+var placeholder
 var line_clear = preload("res://Sound Effects/tetris-gb-21-line-clear.mp3")
 var tetris_clear = preload("res://Sound Effects/tetris-gb-22-tetris-4-lines.mp3")
+var theme = preload("res://tetrisTheme.mp3")
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -36,6 +37,7 @@ var count = 0
 var block_index = count%7
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	initializeMap() # Replace with function body.
 	shuffle_blocks()
 	for i in range(4):
@@ -72,7 +74,6 @@ func _ready():
 	current_block.position = Vector2(0,0)
 	get_tree().get_root().add_child.call_deferred(current_block)
 	current_block.active=true
-	firstBlock = true
 
 	
 
@@ -88,8 +89,10 @@ func initializeMap():
 
 		
 func updateMap():
-	for i in range(4):		
-		map[blockPos[i][1]][blockPos[i][0]] = "[]"	
+	for a in range(4):		
+		map[blockPos[a][1]][blockPos[a][0]] = "[]"	
+	print(tetrominoCount)
+	print(allTetrominoes[0])
 	printMap()
 
 
@@ -103,6 +106,7 @@ func printMap():
 		row = ""
 		i+=1
 	print()
+
 				
 func initiateBlock():
 	startPos = Vector2(0,0)
@@ -169,7 +173,7 @@ func shiftDown(stationary):
 		else: map[map_height-i-stationary] = map[map_height-i-stationary-1]				
 		
 func checkTop():
-	if blockPos[0][1] < 0:
+	if blockPos[0][1] < 2:
 		playing=false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -217,6 +221,7 @@ func getShadowShift():
 	
 func _process(delta): 
 	if !$Background.is_playing():
+		$Background.stream = theme
 		$Background.play()
 		
 	if playing:
@@ -226,25 +231,26 @@ func _process(delta):
 	
 	
 		block_index = count % 7
-		if canHold:
-			if Input.is_action_just_pressed("Hold"):
-				current_block.active = false
-				current_block.position = Vector2(-50-blockPos[0][0]*8,40-blockPos[0][1]*8)
-				if hold:
+		if Input.is_action_just_pressed("Hold"):
+			current_block.active = false
+			current_block.position = Vector2(-50-blockPos[0][0]*8,40-blockPos[0][1]*8)
+			if hold:
+				if (allTetrominoes.find(current_block) > hold-1):
 					current_block = allTetrominoes[hold-1]
 					current_block.position = Vector2(0,0)
 					current_block.reset()
 					current_block.shift_x(5)
 					current_block.active = true
-					if firstBlock:
+					if current_block == allTetrominoes[0]:
 						current_block.shift_x(-5)
-						firstBlock = false
-				else: 
-					firstHold = true
-				hold = tetrominoCount - 3					
-				
+			else: 
+				firstHold = true
+			
+			hold = tetrominoCount - 3	
+			
 		if block_index == 0: 
 			shuffle_blocks()
+			
 		if (current_block.isDone()==true or firstHold):
 			if firstHold:
 				firstHold = false
@@ -289,7 +295,8 @@ func _process(delta):
 			
 			tetrominoCount+=1
 			checkRows()
-				
+		
+		
 		blockPos = current_block.checkPositions()
 		getSliderValues()	
 		setSettingValues()
@@ -302,12 +309,38 @@ func _process(delta):
 		
 		getBottom()
 		moveShadow()
+		if $Settings.resume:
+			resume()
+		if $Settings.restart:
+			restart()
 			
+func _on_settings_button_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		$Settings.paused = true
+		$Background.volume_db = -20
+		for block in allTetrominoes:
+			block.visible = false
+		get_tree().paused = true
+		$SettingsBackground.visible = true
+		$Settings.visible = true
+		for i in range(9):
+			$SettingsBackground.modulate.a+=0.05
+			$Settings.modulate.a+=0.2
+			await get_tree().create_timer(0.005).timeout
 			
-	
-	
-	
+func resume():
+	$Settings.resume = false
+	$Background.volume_db = 0
+	for block in allTetrominoes:
+		block.visible = true
+	for i in range(9):
+		$SettingsBackground.modulate.a-=0.05
+		$Settings.modulate.a-=0.2
+		await get_tree().create_timer(0.005).timeout
+	$SettingsBackground.visible = false
+	$Settings.visible = false
 
+func restart():
+	$Settings.restart = false
+	get_tree().reload_current_scene()
 		
-	
-	

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_gcxpg"]
 
 [node name="ShadowPiece" type="Sprite2D"]
-modulate = Color(0.156863, 0.156863, 0.156863, 0.768627)
+modulate = Color(0.156863, 0.156863, 0.156863, 1)
 script = ExtResource("1_dx5xt")
 
 [node name="Block" type="Sprite2D" parent="."]

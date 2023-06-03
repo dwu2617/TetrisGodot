@@ -14,6 +14,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3k63x")
 
+[node name="Resume" type="Button" parent="."]
+layout_mode = 2
+offset_left = -60.0
+offset_top = 185.0
+offset_right = 180.0
+offset_bottom = 276.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Resume"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 185.0
+offset_right = 233.0
+offset_bottom = 276.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Restart"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 81.0
+offset_top = 185.0
+offset_right = 196.0
+offset_bottom = 276.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 92.0
@@ -28,6 +58,9 @@ text = "SDF"
 [node name="SDF_Slider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+step = 10.0
+scrollable = false
+tick_count = 10
 
 [node name="ARR" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -37,6 +70,9 @@ text = "ARR"
 [node name="ARR_Slider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+step = 10.0
+scrollable = false
+tick_count = 10
 
 [node name="DAS" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -46,7 +82,31 @@ text = "DAS"
 [node name="DAS_Slider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+step = 10.0
+scrollable = false
+tick_count = 10
 
+[node name="MyControls" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 88.0
+offset_right = 186.0
+offset_bottom = 112.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 60.0
+offset_right = 469.0
+offset_bottom = 146.0
+scale = Vector2(0.256, 0.256)
+theme_override_font_sizes/font_size = 60
+text = "My Controls"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="VBoxContainer/SDF_Slider" to="." method="_on_sdf_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/ARR_Slider" to="." method="_on_arr_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/DAS_Slider" to="." method="_on_das_slider_value_changed"]
+[connection signal="pressed" from="MyControls" to="." method="_on_my_controls_pressed"]

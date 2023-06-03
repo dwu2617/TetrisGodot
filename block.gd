@@ -4,7 +4,7 @@ class_name block extends Node2D
 var gravity = 2
 var gravity_time = 60/gravity
 var count = 0
-var playing: bool = true
+var playing = true
 var x_leftBound = -24
 var x_rightBound = 24
 var floorBound = 17
@@ -83,7 +83,6 @@ func actions(count):
 			pieceEffect = move_piece
 			move_right()				
 		elif Input.is_action_pressed("Right"):
-			
 			dasRightCount +=1
 			dasLeftCount = 0
 			if dasRightCount%int(das) == 0:
@@ -112,7 +111,7 @@ func getCells():
 
 func onFloor():
 	for block in children:
-		if getY(block) == floorBound:
+		if getY(block) >= floorBound:
 			return true
 	return false
 	
@@ -263,6 +262,7 @@ func move(block):
 	
 func reset():
 	var i = 0
+	playing = true
 	for block in children:
 		block.position.x = initialPos[i][0]*8+4
 		block.position.y = initialPos[i][1]*8+4
