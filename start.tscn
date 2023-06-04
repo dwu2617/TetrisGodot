@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp7g8o8k2hsp"]
+[gd_scene load_steps=4 format=3 uid="uid://bk4msimmt1stc"]
 
 [ext_resource type="Script" path="res://start.gd" id="1_exa3c"]
 [ext_resource type="VideoStream" path="res://tetris.ogv" id="1_n45df"]
-[ext_resource type="PackedScene" uid="uid://dq3mcyy0pr77x" path="res://starting_screen.tscn" id="3_hyn2e"]
+[ext_resource type="PackedScene" uid="uid://ckkw6cf1xme7x" path="res://starting_screen.tscn" id="3_hyn2e"]
 
 [node name="Start" type="Node2D"]
 script = ExtResource("1_exa3c")

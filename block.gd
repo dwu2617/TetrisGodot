@@ -7,7 +7,7 @@ var count = 0
 var playing = true
 var x_leftBound = -24
 var x_rightBound = 24
-var floorBound = 17
+var floorBound = 99
 var collision
 var cells = []
 var children = []
@@ -33,7 +33,7 @@ var move_piece = preload("res://Sound Effects/tetris-gb-18-move-piece.mp3")
 var rotate_piece = preload("res://Sound Effects/tetris-gb-19-rotate-piece.mp3")
 var landed_piece = preload("res://Sound Effects/tetris-gb-27-piece-landed.mp3")
 var can180 = false
-
+var pos = [0,0,0,0]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -49,7 +49,7 @@ func _physics_process(delta):
 				children.append(block)
 		count += 1	
 		getCells()
-		if count%gravity_time == 0 && playing && !hardDrop:
+		if count%gravity_time == 0 && playing && !hardDrop && getLowest()<floorBound:
 			shift_y(1)
 		if !playing:
 			if !hardDrop:
@@ -98,7 +98,7 @@ func actions(count):
 			normal_drop()
 		if Input.is_action_just_pressed("Harddrop"):
 			hard_drop()
-		playing = !onFloor()
+
 	else:
 		pieceEffect = landed_piece
 
@@ -109,11 +109,6 @@ func getCells():
 		cells.append(block.position)
 	#print(cells)
 
-func onFloor():
-	for block in children:
-		if getY(block) >= floorBound:
-			return true
-	return false
 	
 func getChildren():
 	for block in self.get_children():
@@ -134,10 +129,11 @@ func checkRotation(radians):
 		if (Vector2(rotatedX,rotatedY) + pivotPoint).x<1:
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x < furthestPoint:
 				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x
-		elif map[change((Vector2(rotatedX,rotatedY) + pivotPoint).y)][change((Vector2(rotatedX,rotatedY) + pivotPoint).x)] == "[]":
-			shift_y(-2)
-		elif change((Vector2(rotatedX,rotatedY) + pivotPoint).y)>17:
+		elif change((Vector2(rotatedX,rotatedY) + pivotPoint).y)>floorBound:
 			shift_y(-1)
+		elif map[change((Vector2(rotatedX,rotatedY) + pivotPoint).y)][change((Vector2(rotatedX,rotatedY) + pivotPoint).x)] == "[]":
+			shift_y(-1)
+		
 		if change((Vector2(rotatedX,rotatedY) + pivotPoint).x)>9:
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x > furthestPoint:
 				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8 
@@ -184,6 +180,7 @@ func hard_drop():
 			y_shift = bottom[column] - getY(block)
 	if y_shift > 0:
 		shift_y(y_shift-1)
+	playing = !playing
 
 				
 func isDone():
@@ -197,9 +194,10 @@ func shift_x(shift):
 		block.position.x += shift * 8
 
 func checkPositions():
-	var pos = []
+	var i = 0
 	for block in self.get_children():	
-		pos.append([getX(block),getY(block)])
+		pos[i] = ([getX(block),getY(block)])
+		i+=1
 	return pos
 
 func getX(block):

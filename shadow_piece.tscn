@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bupmcbunu1obe"]
+[gd_scene load_steps=3 format=3 uid="uid://bqyqwvfkcnlkd"]
 
 [ext_resource type="Script" path="res://shadow_piece.gd" id="1_dx5xt"]
 [ext_resource type="Texture2D" uid="uid://cclpg26pxd0d4" path="res://tiles_tetris_8x8.png" id="2_gcxpg"]

@@ -1,33 +1,33 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=11 format=3 uid="uid://bi1o7l72835yc"]
 
-[ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
-[ext_resource type="Texture2D" path="res://game_background.png" id="2_dxcve"]
-[ext_resource type="Texture2D" path="res://background2.jpeg" id="3_0c60k"]
-[ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="4_n60b8"]
-[ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="5_676l0"]
-[ext_resource type="Texture2D" path="res://tetrisBackground.png" id="5_rhhy1"]
-[ext_resource type="AudioStream" path="res://tetrisTheme.mp3" id="6_byytl"]
-[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="7_uhuwn"]
-[ext_resource type="Texture2D" path="res://settingsButton.png" id="9_bsml7"]
-[ext_resource type="Texture2D" path="res://settingsBackground.jpg" id="10_xva0x"]
+[ext_resource type="Script" path="res://tutorial.gd" id="1_twblh"]
+[ext_resource type="Texture2D" path="res://game_background.png" id="1_vh60a"]
+[ext_resource type="Texture2D" path="res://background2.jpeg" id="2_v3nej"]
+[ext_resource type="Texture2D" path="res://tetrisBackground.png" id="3_y3agf"]
+[ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="4_44hqt"]
+[ext_resource type="AudioStream" path="res://tetrisTheme.mp3" id="5_f6lm0"]
+[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="6_nuntq"]
+[ext_resource type="Texture2D" path="res://settingsButton.png" id="7_kh8nd"]
+[ext_resource type="Texture2D" path="res://settingsBackground.jpg" id="8_vetlt"]
+[ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="9_s2xa5"]
 
-[node name="Map" type="Node2D"]
+[node name="Tutorial" type="Node2D"]
 process_mode = 1
 position = Vector2(40, 728)
-script = ExtResource("1_pdvgp")
+script = ExtResource("1_twblh")
 metadata/_edit_horizontal_guides_ = [-73.0]
 metadata/_edit_vertical_guides_ = [41.0]
 
 [node name="GameBackground" type="Sprite2D" parent="."]
 position = Vector2(-6, 4)
 scale = Vector2(0.213, 0.213)
-texture = ExtResource("2_dxcve")
+texture = ExtResource("1_vh60a")
 
 [node name="GameBackground2" type="Sprite2D" parent="."]
 modulate = Color(1, 0.686275, 0.196078, 0.223529)
 position = Vector2(-3.74999, 2.24999)
 scale = Vector2(0.549, 0.415567)
-texture = ExtResource("3_0c60k")
+texture = ExtResource("2_v3nej")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4.3, 4.3)
@@ -64,18 +64,18 @@ text = "Next"
 [node name="TetrisBackground" type="Sprite2D" parent="."]
 position = Vector2(0, 8.0695)
 scale = Vector2(0.506848, 0.502707)
-texture = ExtResource("5_rhhy1")
+texture = ExtResource("3_y3agf")
 
-[node name="ShadowPiece" parent="." instance=ExtResource("5_676l0")]
+[node name="ShadowPiece" parent="." instance=ExtResource("4_44hqt")]
 position = Vector2(-40, -72)
 
 [node name="Background" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("6_byytl")
+stream = ExtResource("5_f6lm0")
 autoplay = true
 
 [node name="Effects" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_uhuwn")
+stream = ExtResource("6_nuntq")
 
 [node name="PieceEffects" type="AudioStreamPlayer" parent="."]
 volume_db = 5.622
@@ -90,7 +90,7 @@ scale = Vector2(0.03, 0.03)
 position = Vector2(-27.9219, -16.7617)
 rotation = 3.14159
 scale = Vector2(0.605913, 0.605913)
-texture = ExtResource("9_bsml7")
+texture = ExtResource("7_kh8nd")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SettingsButton"]
 polygon = PackedVector2Array(-61.2554, 149.906, -61.2554, 83.2391, -94.5884, 83.2391, -127.922, 83.2391, -194.588, 16.5725, -161.255, 16.5725, -161.255, -16.7609, -161.255, -50.0942, -127.922, -116.761, -94.5884, -116.761, -61.2554, -183.428, 5.41162, -183.428, 5.41162, -116.761, 38.7446, -116.761, 105.412, -116.761, 138.745, -50.0942, 72.0781, -16.7609, 105.412, 16.5725, 105.412, 116.572, 38.7446, 83.2391, 5.41162, 116.572, 5.41162, 149.906)
@@ -99,9 +99,9 @@ polygon = PackedVector2Array(-61.2554, 149.906, -61.2554, 83.2391, -94.5884, 83.
 visible = false
 modulate = Color(0.996078, 0.396078, 0.407843, 0)
 position = Vector2(-5, 1)
-texture = ExtResource("10_xva0x")
+texture = ExtResource("8_vetlt")
 
-[node name="Settings" parent="." instance=ExtResource("4_n60b8")]
+[node name="Settings" parent="." instance=ExtResource("9_s2xa5")]
 process_mode = 3
 visible = false
 modulate = Color(0.470588, 0.662745, 0.792157, 0)
@@ -111,4 +111,4 @@ offset_right = 822.0
 offset_bottom = -55.787
 scale = Vector2(0.58, 0.58)
 
-[connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event"]
+[connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event" flags=18]

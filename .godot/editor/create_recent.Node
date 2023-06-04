@@ -1,6 +1,8 @@
+Button
+Node2D
+Node
 Label
 CheckButton
-Button
 HBoxContainer
 Control
 CollisionPolygon2D
@@ -17,5 +19,4 @@ HSlider
 GridContainer
 RigidBody2D
 TileMap
-Node2D
 Camera2D

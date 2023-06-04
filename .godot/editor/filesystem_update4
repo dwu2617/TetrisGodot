@@ -11,3 +11,8 @@ res://s_block.tscn
 res://o_block.tscn
 res://start.tscn
 res://starting_screen.tscn
+res://map.gd
+res://block.gd
+res://starting_screen.gd
+res://tutorial.tscn
+res://tutorial.gd
