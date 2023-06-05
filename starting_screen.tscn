@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckkw6cf1xme7x"]
 
 [ext_resource type="Script" path="res://starting_screen.gd" id="1_3vjtw"]
-[ext_resource type="AudioStream" path="res://tetrisTheme.mp3" id="2_yaegy"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="2_yaegy"]
 
 [node name="StartingScreen" type="Control"]
 texture_filter = 1

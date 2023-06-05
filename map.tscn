@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=13 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
-[ext_resource type="Texture2D" path="res://game_background.png" id="2_dxcve"]
-[ext_resource type="Texture2D" path="res://background2.jpeg" id="3_0c60k"]
+[ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_dxcve"]
+[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="3_0c60k"]
 [ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="4_n60b8"]
+[ext_resource type="Texture2D" uid="uid://vs566gkdawws" path="res://white_background.png" id="4_us1uw"]
 [ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="5_676l0"]
-[ext_resource type="Texture2D" path="res://tetrisBackground.png" id="5_rhhy1"]
-[ext_resource type="AudioStream" path="res://tetrisTheme.mp3" id="6_byytl"]
+[ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_rhhy1"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="6_byytl"]
 [ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="7_uhuwn"]
-[ext_resource type="Texture2D" path="res://settingsButton.png" id="9_bsml7"]
-[ext_resource type="Texture2D" path="res://settingsBackground.jpg" id="10_xva0x"]
+[ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="9_bsml7"]
+[ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="10_xva0x"]
+[ext_resource type="Texture2D" uid="uid://c6n38fceav23p" path="res://musicIcon.png" id="12_rafxe"]
 
 [node name="Map" type="Node2D"]
 process_mode = 1
@@ -26,11 +28,17 @@ texture = ExtResource("2_dxcve")
 [node name="GameBackground2" type="Sprite2D" parent="."]
 modulate = Color(1, 0.686275, 0.196078, 0.223529)
 position = Vector2(-3.74999, 2.24999)
-scale = Vector2(0.549, 0.415567)
+scale = Vector2(0.646, 0.492)
 texture = ExtResource("3_0c60k")
 
+[node name="WhiteBackground" type="Sprite2D" parent="."]
+modulate = Color(1, 0.67451, 1, 0.647059)
+scale = Vector2(-0.048, -0.125)
+texture = ExtResource("4_us1uw")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4.3, 4.3)
+position = Vector2(-1, -1)
+zoom = Vector2(4.092, 4.092)
 
 [node name="Hold" type="Label" parent="."]
 texture_filter = 1
@@ -62,6 +70,7 @@ theme_override_font_sizes/font_size = 60
 text = "Next"
 
 [node name="TetrisBackground" type="Sprite2D" parent="."]
+modulate = Color(0.141176, 1, 0.976471, 1)
 position = Vector2(0, 8.0695)
 scale = Vector2(0.506848, 0.502707)
 texture = ExtResource("5_rhhy1")
@@ -110,5 +119,10 @@ offset_top = -56.0
 offset_right = 822.0
 offset_bottom = -55.787
 scale = Vector2(0.58, 0.58)
+
+[node name="MusicIcon" type="Sprite2D" parent="."]
+position = Vector2(112, -44)
+scale = Vector2(0.004, 0.004)
+texture = ExtResource("12_rafxe")
 
 [connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event"]

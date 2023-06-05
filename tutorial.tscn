@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bi1o7l72835yc"]
+[gd_scene load_steps=12 format=3 uid="uid://bi1o7l72835yc"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_twblh"]
-[ext_resource type="Texture2D" path="res://game_background.png" id="1_vh60a"]
-[ext_resource type="Texture2D" path="res://background2.jpeg" id="2_v3nej"]
-[ext_resource type="Texture2D" path="res://tetrisBackground.png" id="3_y3agf"]
+[ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="1_vh60a"]
+[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="2_v3nej"]
+[ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="3_y3agf"]
 [ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="4_44hqt"]
-[ext_resource type="AudioStream" path="res://tetrisTheme.mp3" id="5_f6lm0"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="5_f6lm0"]
 [ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="6_nuntq"]
-[ext_resource type="Texture2D" path="res://settingsButton.png" id="7_kh8nd"]
-[ext_resource type="Texture2D" path="res://settingsBackground.jpg" id="8_vetlt"]
+[ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="7_kh8nd"]
+[ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="8_vetlt"]
 [ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="9_s2xa5"]
+[ext_resource type="PackedScene" uid="uid://c1g1jsvcw8j73" path="res://tutorial_instructions.tscn" id="11_yqa4q"]
 
 [node name="Tutorial" type="Node2D"]
 process_mode = 1
@@ -100,6 +101,13 @@ visible = false
 modulate = Color(0.996078, 0.396078, 0.407843, 0)
 position = Vector2(-5, 1)
 texture = ExtResource("8_vetlt")
+
+[node name="TutorialInstructions" parent="." instance=ExtResource("11_yqa4q")]
+offset_left = -112.0
+offset_top = -1.0
+offset_right = -112.0
+offset_bottom = -1.0
+scale = Vector2(0.485, 0.485)
 
 [node name="Settings" parent="." instance=ExtResource("9_s2xa5")]
 process_mode = 3

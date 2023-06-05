@@ -33,17 +33,17 @@ var move_piece = preload("res://Sound Effects/tetris-gb-18-move-piece.mp3")
 var rotate_piece = preload("res://Sound Effects/tetris-gb-19-rotate-piece.mp3")
 var landed_piece = preload("res://Sound Effects/tetris-gb-27-piece-landed.mp3")
 var can180 = false
-var pos = [0,0,0,0]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if initial:
-		initialPos = checkPositions()
-		initial = false
 	if active:
+		if initial:
+			initialPos = checkPositions()
+			initial = false
 		if count == 0:
 			for block in self.get_children():
 				children.append(block)
@@ -194,10 +194,9 @@ func shift_x(shift):
 		block.position.x += shift * 8
 
 func checkPositions():
-	var i = 0
+	var pos = []
 	for block in self.get_children():	
-		pos[i] = ([getX(block),getY(block)])
-		i+=1
+		pos.append([getX(block),getY(block)])
 	return pos
 
 func getX(block):

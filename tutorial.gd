@@ -230,20 +230,23 @@ func _process(delta):
 	
 	
 		block_index = count % 7
+
 		if Input.is_action_just_pressed("Hold"):
-			current_block.active = false
-			current_block.position = Vector2(-50-blockPos[0][0]*8,700-blockPos[0][1]*8)
 			if hold:
 				if (allTetrominoes.find(current_block) > hold-1):
+					current_block.active = false
+					current_block.position = Vector2(-50-blockPos[0][0]*8,700-blockPos[0][1]*8)
 					print("yay")
 					current_block = allTetrominoes[hold-1]
-					current_block.position = Vector2(0,0)
 					current_block.reset()
-					current_block.shift_x(5)
+					print(current_block.initialPos)
+					current_block.position = Vector2(0,0)
 					current_block.active = true
-					#if current_block == allTetrominoes[0]:
-					current_block.shift_x(-5)	
+
+
 			else: 
+				current_block.active = false
+				current_block.position = Vector2(-50-blockPos[0][0]*8,700-blockPos[0][1]*8)
 				firstHold = true
 			
 			hold = tetrominoCount - 3	
