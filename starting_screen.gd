@@ -25,3 +25,7 @@ func _on_button_pressed():
 
 func _on_20_lines_pressed():
 	get_tree().change_scene_to_file("res://20_lines.tscn")
+
+
+func _on_blitz_pressed():
+	get_tree().change_scene_to_file("res://blitz.tscn")

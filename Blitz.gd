@@ -29,6 +29,8 @@ var theme
 var previousX
 var numLines = 0
 var pps = 0
+var scoreMultiplier = 1
+var lastElapsed = 0
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -40,7 +42,7 @@ var l_block = load("res://l_block.tscn")
 var j_block = load("res://j_block.tscn")
 var count = 0
 var block_index = count%7
-var goal = 20
+var time = 60
 var elapsed = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -162,7 +164,7 @@ func checkRows():
 						if tetromino.getY(blocks) == i:
 							map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
 							tetromino.clear(blocks)									
-							score += 20 * linesCleared
+							score += scoreMultiplier * 20 * linesCleared
 						elif tetromino.getY(blocks) < i:
 							if tetromino.active == true:
 								tetromino.move(blocks)
@@ -237,13 +239,14 @@ func _process(delta):
 		pps = (tetrominoCount-4)/elapsed
 	if Input.is_action_just_pressed("Restart"):
 		restart()
-	if numLines >= goal:
-		numLines = goal
+	
 	else:
 		elapsed += delta
-	$LineCount.text=str(numLines, "/", goal, "\n", "time ", "%0.3f" % elapsed, "\n", "pps ", "%0.2f" % pps )
-	$LinesLeft.text=str(goal-numLines)
-	if numLines == goal:
+	if time-elapsed <= 0:
+		elapsed = time
+	$Stats.text=str("score ", score, "\n", "time ", "%0.3f" % (time-elapsed), "\n", "pps ", "%0.2f" % pps )
+	$ScoreCount.text=str(score)
+	if elapsed >= time:
 		deathScreen()
 	if dead():
 		$Effects.stream = death
@@ -363,7 +366,23 @@ func _process(delta):
 			restart()
 		if $MusicSettings.resume:
 			resume($MusicSettings)
+		if elapsed > 50:
+			current_block.gravity_time = 1
+			scoreMultiplier = 20
+		elif elapsed > 40:
+			current_block.gravity_time = 2
+			scoreMultiplier = 10
+		elif elapsed > 30:
+			current_block.gravity_time = 5
+			scoreMultiplier = 5
+		elif elapsed > 20:
+			current_block.gravity_time = 10
+			scoreMultiplier = 3
+		elif elapsed > 10:
+			current_block.gravity_time = 20
 
+
+		
 func openScreen(screen):
 	screen.paused = true
 	$Background.volume_db = -20
@@ -387,14 +406,11 @@ func _on_music_button_input_event(viewport, event, shape_idx):
 		openScreen($MusicSettings)
 
 func deathScreen():
-	if numLines < goal:
-		$Lose.visible = true
+	if score > global.highscore_blitz:
+		$Win.text = "Highscore!\n %d" % score
+		global.highscore_blitz = score
 	else:
-		if elapsed < global.highscore_20:
-			$Win.text = "Highscore! \n %0.3f" % elapsed
-			global.highscore_20 = elapsed
-		else:
-			$Win.text = "%0.3f" % elapsed
+		$Win.text = "%d" % score
 	openScreen($DeathScreen)
 	
 		

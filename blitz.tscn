@@ -1,42 +1,43 @@
-[gd_scene load_steps=15 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=15 format=3 uid="uid://btsik24x015q"]
 
-[ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
-[ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_dxcve"]
-[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="3_0c60k"]
-[ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="4_n60b8"]
-[ext_resource type="Texture2D" uid="uid://vs566gkdawws" path="res://white_background.png" id="4_us1uw"]
-[ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="5_676l0"]
-[ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_rhhy1"]
-[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="6_byytl"]
-[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="7_uhuwn"]
-[ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="9_bsml7"]
-[ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="10_xva0x"]
-[ext_resource type="Texture2D" uid="uid://c6n38fceav23p" path="res://musicIcon.png" id="12_rafxe"]
-[ext_resource type="PackedScene" uid="uid://qr6nwkj40qdo" path="res://music_settings.tscn" id="13_kl82m"]
-[ext_resource type="PackedScene" uid="uid://dtib0spjs2n0q" path="res://death_screen.tscn" id="14_qyvvd"]
+[ext_resource type="Script" path="res://Blitz.gd" id="1_rpthe"]
+[ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_f77cv"]
+[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="3_shngf"]
+[ext_resource type="Texture2D" uid="uid://vs566gkdawws" path="res://white_background.png" id="4_un0k7"]
+[ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_v6uar"]
+[ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="6_parer"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="7_ai2k2"]
+[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="8_fbuiy"]
+[ext_resource type="Texture2D" uid="uid://c6n38fceav23p" path="res://musicIcon.png" id="9_w2pci"]
+[ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="10_c52os"]
+[ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="11_75vhn"]
+[ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="12_eymvd"]
+[ext_resource type="PackedScene" uid="uid://qr6nwkj40qdo" path="res://music_settings.tscn" id="13_8rlow"]
+[ext_resource type="PackedScene" uid="uid://dtib0spjs2n0q" path="res://death_screen.tscn" id="14_1ffi6"]
 
-[node name="Map" type="Node2D"]
+[node name="Blitz" type="Node2D"]
 process_mode = 1
+texture_filter = 1
 position = Vector2(40, 728)
-script = ExtResource("1_pdvgp")
+script = ExtResource("1_rpthe")
 metadata/_edit_horizontal_guides_ = [-73.0]
 metadata/_edit_vertical_guides_ = [41.0]
 
 [node name="GameBackground" type="Sprite2D" parent="."]
 position = Vector2(-6, 4)
 scale = Vector2(0.213, 0.213)
-texture = ExtResource("2_dxcve")
+texture = ExtResource("2_f77cv")
 
 [node name="GameBackground2" type="Sprite2D" parent="."]
 modulate = Color(1, 0.686275, 0.196078, 0.223529)
 position = Vector2(-3.74999, 2.24999)
 scale = Vector2(0.646, 0.492)
-texture = ExtResource("3_0c60k")
+texture = ExtResource("3_shngf")
 
 [node name="WhiteBackground" type="Sprite2D" parent="."]
 modulate = Color(1, 0.67451, 1, 0.647059)
 scale = Vector2(-0.048, -0.125)
-texture = ExtResource("4_us1uw")
+texture = ExtResource("4_un0k7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -1)
@@ -75,23 +76,38 @@ text = "Next"
 modulate = Color(0.141176, 1, 0.976471, 1)
 position = Vector2(0, 8.0695)
 scale = Vector2(0.506848, 0.502707)
-texture = ExtResource("5_rhhy1")
+texture = ExtResource("5_v6uar")
 
-[node name="ShadowPiece" parent="." instance=ExtResource("5_676l0")]
+[node name="ShadowPiece" parent="." instance=ExtResource("6_parer")]
 position = Vector2(-40, -72)
 
 [node name="Background" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("6_byytl")
+stream = ExtResource("7_ai2k2")
 autoplay = true
 
 [node name="Effects" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("7_uhuwn")
+stream = ExtResource("8_fbuiy")
 
 [node name="PieceEffects" type="AudioStreamPlayer" parent="."]
 volume_db = 5.622
 max_polyphony = 3
+
+[node name="Stats" type="Label" parent="."]
+offset_left = -119.0
+offset_top = 13.0
+offset_right = -79.0
+offset_bottom = 39.0
+scale = Vector2(0.644, 0.644)
+text = "10"
+
+[node name="ScoreCount" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -48.0
+offset_right = 22.0
+offset_bottom = -22.0
+text = "20"
+horizontal_alignment = 1
 
 [node name="MusicButton" type="Area2D" parent="."]
 position = Vector2(112, -44)
@@ -100,7 +116,7 @@ scale = Vector2(0.004, 0.004)
 [node name="MusicIcon" type="Sprite2D" parent="MusicButton"]
 position = Vector2(-250, 250)
 scale = Vector2(1.1, 1.1)
-texture = ExtResource("12_rafxe")
+texture = ExtResource("9_w2pci")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MusicButton"]
 polygon = PackedVector2Array(750, -1000, 750, 1250, -1250, 1500, -1500, 750, -750, -750)
@@ -114,7 +130,7 @@ scale = Vector2(0.03, 0.03)
 position = Vector2(-27.9219, -16.7617)
 rotation = 3.14159
 scale = Vector2(0.605913, 0.605913)
-texture = ExtResource("9_bsml7")
+texture = ExtResource("10_c52os")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SettingsButton"]
 polygon = PackedVector2Array(-61.2554, 149.906, -61.2554, 83.2391, -94.5884, 83.2391, -127.922, 83.2391, -194.588, 16.5725, -161.255, 16.5725, -161.255, -16.7609, -161.255, -50.0942, -127.922, -116.761, -94.5884, -116.761, -61.2554, -183.428, 5.41162, -183.428, 5.41162, -116.761, 38.7446, -116.761, 105.412, -116.761, 138.745, -50.0942, 72.0781, -16.7609, 105.412, 16.5725, 105.412, 116.572, 38.7446, 83.2391, 5.41162, 116.572, 5.41162, 149.906)
@@ -123,9 +139,9 @@ polygon = PackedVector2Array(-61.2554, 149.906, -61.2554, 83.2391, -94.5884, 83.
 visible = false
 modulate = Color(0.996078, 0.396078, 0.407843, 0)
 position = Vector2(-5, 1)
-texture = ExtResource("10_xva0x")
+texture = ExtResource("11_75vhn")
 
-[node name="Settings" parent="." instance=ExtResource("4_n60b8")]
+[node name="Settings" parent="." instance=ExtResource("12_eymvd")]
 process_mode = 3
 visible = false
 offset_left = -26.0
@@ -134,7 +150,7 @@ offset_right = 822.0
 offset_bottom = -55.787
 scale = Vector2(0.58, 0.58)
 
-[node name="MusicSettings" parent="." instance=ExtResource("13_kl82m")]
+[node name="MusicSettings" parent="." instance=ExtResource("13_8rlow")]
 process_mode = 3
 visible = false
 offset_left = -108.0
@@ -143,21 +159,21 @@ offset_right = -108.0
 offset_bottom = -98.0
 scale = Vector2(0.564, 0.564)
 
-[node name="DeathScreen" parent="." instance=ExtResource("14_qyvvd")]
+[node name="DeathScreen" parent="." instance=ExtResource("14_1ffi6")]
 process_mode = 3
 visible = false
-offset_left = -70.0
-offset_top = -182.0
-offset_right = 778.0
-offset_bottom = -181.787
-scale = Vector2(1.039, 1.039)
+offset_left = -76.0
+offset_top = -177.0
+offset_right = 772.0
+offset_bottom = -176.787
+scale = Vector2(1.012, 1.012)
 
 [node name="Lose" type="Label" parent="."]
 visible = false
-offset_left = -43.0
-offset_top = -45.0
-offset_right = 207.0
-offset_bottom = 41.0
+offset_left = -41.0
+offset_top = -28.0
+offset_right = 209.0
+offset_bottom = 58.0
 scale = Vector2(0.335, 0.335)
 theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
@@ -175,5 +191,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event"]
-[connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event"]
+[connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event" flags=18]
+[connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event" flags=18]

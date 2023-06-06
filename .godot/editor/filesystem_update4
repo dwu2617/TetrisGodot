@@ -13,3 +13,7 @@ res://20_lines.tscn
 res://20_lines.gd
 res://map.gd
 res://global.gd
+res://Blitz.gd
+res://starting_screen.gd
+res://blitz.tscn
+res://Settings.gd
