@@ -1,20 +1,19 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686034855
-20Lines.gd::GDScript::-1::1686026203::0::1::::<>Node2D<>::
+::res://::1686036056
 20_lines.gd::GDScript::-1::1686027334::0::1::::<>Node2D<>::
-20_lines.tscn::PackedScene::3558415654932440962::1686034400::0::1::::<><>::res://20_lines.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://vs566gkdawws<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://c6n38fceav23p<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
+20_lines.tscn::PackedScene::3558415654932440962::1686035084::0::1::::<><>::res://20_lines.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://vs566gkdawws<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://c6n38fceav23p<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
 background2.jpeg::CompressedTexture2D::626317196193623534::1685835883::1685835883::1::::<><>::
 background.png::CompressedTexture2D::7986143948994059522::1680904487::1680904241::1::::<><>::
 Blitz.gd::GDScript::-1::1686029586::0::1::::<>Node2D<>::
-blitz.tscn::PackedScene::110519781478801036::1686034818::0::1::::<><>::res://Blitz.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://vs566gkdawws<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://c6n38fceav23p<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
+blitz.tscn::PackedScene::110519781478801036::1686035011::0::1::::<><>::res://Blitz.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://vs566gkdawws<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://c6n38fceav23p<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
 block.gd::GDScript::-1::1686017828::0::1::::block<>Node2D<>::
-block.tscn::PackedScene::10245409292414101::1686034818::0::1::::<><>::res://block.gd<>uid://3ih7q0835dj1
+block.tscn::PackedScene::10245409292414101::1686035011::0::1::::<><>::res://block.gd<>uid://3ih7q0835dj1
 death_screen.gd::GDScript::-1::1686015262::0::1::::<>Control<>::
 death_screen.tscn::PackedScene::8509471433101204334::1686026111::0::1::::<><>::res://death_screen.gd
 edge.png::CompressedTexture2D::2223646731103309368::1682625900::1682625902::1::::<><>::
 game_background.png::CompressedTexture2D::6671595052064679683::1685835883::1685835883::1::::<><>::
 global.gd::GDScript::-1::1686034181::0::1::::<>Node2D<>::
-global.tscn::PackedScene::3134535269447560833::1686034818::0::1::::<><>::res://global.gd
+global.tscn::PackedScene::3134535269447560833::1686035011::0::1::::<><>::res://global.gd
 Hold On Tight Instrumental.mp3::AudioStreamMP3::3706386730367758624::1686009602::1686009966::1::::<><>::
 Hold On Tight.mp3::AudioStreamMP3::4451199954093515607::1686009452::1686009966::1::::<><>::
 icon.svg::CompressedTexture2D::8444721839040053209::1680881693::1680881699::1::::<><>::
@@ -25,23 +24,23 @@ j_block.tscn::PackedScene::4858593168182611533::1685850927::0::1::::<><>::res://
 l_block.gd::GDScript::-1::1685835883::0::1::::l_block<>block<>::
 l_block.tscn::PackedScene::8612405788262026705::1685850927::0::1::::<><>::res://l_block.gd<>res://tile_animation.png
 map.gd::GDScript::-1::1686034243::0::1::::<>Node2D<>::
-map.tscn::PackedScene::6966656704425211827::1686034818::0::1::::<><>::res://map.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://cg1lllddle8yb<>uid://vs566gkdawws<>uid://bqyqwvfkcnlkd<>uid://d4a81i40bh51g<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://c6n38fceav23p<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
+map.tscn::PackedScene::6966656704425211827::1686035011::0::1::::<><>::res://map.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://cg1lllddle8yb<>uid://vs566gkdawws<>uid://bqyqwvfkcnlkd<>uid://d4a81i40bh51g<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://c6n38fceav23p<>uid://qr6nwkj40qdo<>uid://dtib0spjs2n0q
 musicIcon.png::CompressedTexture2D::6977291703853264475::1686008033::1686008034::1::::<><>::
 music_settings.gd::GDScript::-1::1686019044::0::1::::<>Control<>::
-music_settings.tscn::PackedScene::1160022533534479468::1686034818::0::1::::<><>::res://music_settings.gd
+music_settings.tscn::PackedScene::1160022533534479468::1686035011::0::1::::<><>::res://music_settings.gd
 o_block.gd::GDScript::-1::1684265862::0::1::::o_block<>block<>::
 o_block.tscn::PackedScene::7780018471887266075::1685850927::0::1::::<><>::res://o_block.gd<>res://tile_animation.png
 Settings.gd::GDScript::-1::1686026366::0::1::::<>Control<>::
-Settings.tscn::PackedScene::5248336364015802533::1686034818::0::1::::<><>::res://Settings.gd
+Settings.tscn::PackedScene::5248336364015802533::1686035011::0::1::::<><>::res://Settings.gd
 settingsBackground.jpg::CompressedTexture2D::9058187427937697850::1685835883::1685835883::1::::<><>::
 settingsButton.png::CompressedTexture2D::4388067455168218749::1685835883::1685835883::1::::<><>::
 shadow_piece.gd::GDScript::-1::1685835883::0::1::::<>Sprite2D<>::
-shadow_piece.tscn::PackedScene::3559999118521150987::1686034818::0::1::::<><>::res://shadow_piece.gd<>uid://cclpg26pxd0d4
+shadow_piece.tscn::PackedScene::3559999118521150987::1686035011::0::1::::<><>::res://shadow_piece.gd<>uid://cclpg26pxd0d4
 start.gd::GDScript::-1::1686003142::0::1::::<>Node2D<>::
 start.gdshader::Shader::-1::1685835883::0::1::::<><>::
-start.tscn::PackedScene::3148937262440757072::1686034818::0::1::::<><>::res://start.gd<>res://tetris.ogv<>uid://ckkw6cf1xme7x
+start.tscn::PackedScene::3148937262440757072::1686035011::0::1::::<><>::res://start.gd<>res://tetris.ogv<>uid://ckkw6cf1xme7x
 starting_screen.gd::GDScript::-1::1686034818::0::1::::<>Control<>::
-starting_screen.tscn::PackedScene::5496764828742294199::1686034818::0::1::::<><>::res://starting_screen.gd<>uid://djo4rs766vks7
+starting_screen.tscn::PackedScene::5496764828742294199::1686035011::0::1::::<><>::res://starting_screen.gd<>uid://djo4rs766vks7
 s_block.gd::GDScript::-1::1684265862::0::1::::s_block<>block<>::
 s_block.tscn::PackedScene::3033674685309646948::1685850927::0::1::::<><>::res://s_block.gd<>res://tile_animation.png
 Tetris 99.mp3::AudioStreamMP3::7306743148299448478::1686009825::1686009966::1::::<><>::
@@ -52,7 +51,7 @@ tetrisTheme.mp3::AudioStreamMP3::7821655079969848228::1685835883::1685835883::1:
 tiles_tetris_8x8.png::CompressedTexture2D::4936850146343655567::1683746249::1683746251::1::::<><>::
 tile_animation.png::CompressedTexture2D::1982285688783388904::1685835883::1685835883::1::::<><>::
 tutorial.gd::GDScript::-1::1686005874::0::1::::<>Node2D<>::
-tutorial.tscn::PackedScene::3002513066169185914::1686034818::0::1::::<><>::res://tutorial.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://vs566gkdawws<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://c1g1jsvcw8j73
+tutorial.tscn::PackedScene::3002513066169185914::1686035011::0::1::::<><>::res://tutorial.gd<>uid://c2b1gwk0smxw2<>uid://i6nl80ebvvt3<>uid://d4a81i40bh51g<>uid://bqyqwvfkcnlkd<>uid://vs566gkdawws<>uid://djo4rs766vks7<>uid://bdix5s7f5q6lb<>uid://b3ru3hlxd5woj<>uid://d2b4a2gpe2m15<>uid://cg1lllddle8yb<>uid://c1g1jsvcw8j73
 tutorial_instructions.gd::GDScript::-1::1686034353::0::1::::<>Control<>::
 tutorial_instructions.tscn::PackedScene::6611733260439249000::1686026111::0::1::::<><>::res://tutorial_instructions.gd
 t_block.gd::GDScript::-1::1685835883::0::1::::t_block<>block<>::

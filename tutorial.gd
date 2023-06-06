@@ -39,7 +39,7 @@ var block_index = count%7
 func _ready():
 	
 	initializeMap() # Replace with function body.
-	shuffle_blocks()
+	block_array = ['l','j','t','z','s','o','i']
 	for i in range(4):
 		if current(block_index) == 'i':
 			wait_block = i_block.instantiate()

@@ -1,4 +1,5 @@
 res://map.tscn
+res://tutorial.gd
 res://block.tscn
 res://Settings.tscn
 res://music_settings.tscn
