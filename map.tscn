@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6ix22x3s7gut"]
+[gd_scene load_steps=15 format=3 uid="uid://c6ix22x3s7gut"]
 
 [ext_resource type="Script" path="res://map.gd" id="1_pdvgp"]
 [ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_dxcve"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="9_bsml7"]
 [ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="10_xva0x"]
 [ext_resource type="Texture2D" uid="uid://c6n38fceav23p" path="res://musicIcon.png" id="12_rafxe"]
+[ext_resource type="PackedScene" uid="uid://qr6nwkj40qdo" path="res://music_settings.tscn" id="13_kl82m"]
+[ext_resource type="PackedScene" uid="uid://dtib0spjs2n0q" path="res://death_screen.tscn" id="14_qyvvd"]
 
 [node name="Map" type="Node2D"]
 process_mode = 1
@@ -84,11 +86,24 @@ stream = ExtResource("6_byytl")
 autoplay = true
 
 [node name="Effects" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("7_uhuwn")
 
 [node name="PieceEffects" type="AudioStreamPlayer" parent="."]
 volume_db = 5.622
 max_polyphony = 3
+
+[node name="MusicButton" type="Area2D" parent="."]
+position = Vector2(112, -44)
+scale = Vector2(0.004, 0.004)
+
+[node name="MusicIcon" type="Sprite2D" parent="MusicButton"]
+position = Vector2(-250, 250)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("12_rafxe")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MusicButton"]
+polygon = PackedVector2Array(750, -1000, 750, 1250, -1250, 1500, -1500, 750, -750, -750)
 
 [node name="SettingsButton" type="Area2D" parent="."]
 position = Vector2(111.162, -56.5028)
@@ -113,16 +128,40 @@ texture = ExtResource("10_xva0x")
 [node name="Settings" parent="." instance=ExtResource("4_n60b8")]
 process_mode = 3
 visible = false
-modulate = Color(0.470588, 0.662745, 0.792157, 0)
 offset_left = -26.0
 offset_top = -56.0
 offset_right = 822.0
 offset_bottom = -55.787
 scale = Vector2(0.58, 0.58)
 
-[node name="MusicIcon" type="Sprite2D" parent="."]
-position = Vector2(112, -44)
-scale = Vector2(0.004, 0.004)
-texture = ExtResource("12_rafxe")
+[node name="MusicSettings" parent="." instance=ExtResource("13_kl82m")]
+process_mode = 3
+visible = false
+offset_left = -108.0
+offset_top = -98.0
+offset_right = -108.0
+offset_bottom = -98.0
+scale = Vector2(0.564, 0.564)
 
+[node name="DeathScreen" parent="." instance=ExtResource("14_qyvvd")]
+process_mode = 3
+visible = false
+offset_left = -70.0
+offset_top = -182.0
+offset_right = 778.0
+offset_bottom = -181.787
+scale = Vector2(1.039, 1.039)
+
+[node name="Lose" type="Label" parent="."]
+visible = false
+offset_left = -43.0
+offset_top = -45.0
+offset_right = 207.0
+offset_bottom = 41.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "You Lost"
+
+[connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event"]
 [connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event"]

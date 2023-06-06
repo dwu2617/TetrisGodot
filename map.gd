@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var global = get_node("/root/Global") 
 var current_block
 var wait_block
 var startPos
@@ -23,7 +24,9 @@ var canHold = true
 var placeholder
 var line_clear = preload("res://Sound Effects/tetris-gb-21-line-clear.mp3")
 var tetris_clear = preload("res://Sound Effects/tetris-gb-22-tetris-4-lines.mp3")
-var theme = preload("res://tetrisTheme.mp3")
+var death = preload("res://Sound Effects/tetris-gb-25-game-over.mp3")
+var theme 
+var previousX
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -75,7 +78,7 @@ func _ready():
 	current_block.position = Vector2(0,0)
 	get_tree().get_root().add_child.call_deferred(current_block)
 	current_block.active=true
-
+	previousX = current_block.getLeft()
 	
 
 func shuffle_blocks():
@@ -117,6 +120,8 @@ func onBlock():
 	for i in range(4):
 		if map[blockPos[i][1]+1][blockPos[i][0]] == "[]":
 			return true
+	if current_block.getLowest() == 99:
+		return true
 	return false
 			
 func getSliderValues():
@@ -126,7 +131,7 @@ func getSliderValues():
 	
 func setSettingValues():
 	current_block.sdf = (100-sdf)/5+2
-	current_block.arr = arr
+	current_block.arr = arr/10
 	current_block.das = das/8+1
 
 func checkLines():
@@ -217,12 +222,28 @@ func getShadowShift():
 		return 1
 	return y_shift
 	
-	
+func dead():
+	for i in range(map_width):
+		for j in range(map_height):
+			if map[j][i] == "[]" && j == 82:
+				return true
+	return false
 func _process(delta): 
+	if dead():
+		$Effects.stream = death
+		$Effects.play()
+		deathScreen()
+	$Background.volume_db = $MusicSettings.music
+	$Effects.volume_db = $MusicSettings.soundEffects
+	$PieceEffects.volume_db = $MusicSettings.soundEffects + 5
+	if theme != $MusicSettings.song:
+		theme = $MusicSettings.song
+		$Background.stream = theme
+		$Background.play()
 	if !$Background.is_playing():
 		$Background.stream = theme
 		$Background.play()
-		
+
 	if playing:
 		if current_block.pieceEffect != null:
 			$PieceEffects.stream = current_block.pieceEffect
@@ -307,8 +328,10 @@ func _process(delta):
 			
 		if (onBlock()):
 			current_block.playing = false
-		if !onBlock() and current_block.hardDrop== false:
+		if !onBlock() and current_block.hardDrop== false and previousX !=current_block.getLeft():
 			current_block.playing = true
+			current_block.doneCounter = 100
+			previousX = current_block.getLeft()
 
 		current_block.setBoundaries(map, bottom)
 		
@@ -317,37 +340,60 @@ func _process(delta):
 		getBottom()
 		moveShadow()
 		if $Settings.resume:
-			resume()
+			resume($Settings)
 		if $Settings.restart:
 			restart()
-			
+		if $DeathScreen.restart:
+			restart()
+		if $MusicSettings.resume:
+			resume($MusicSettings)
+
+func openScreen(screen):
+	screen.paused = true
+	$Background.volume_db = -20
+	$ShadowPiece.visible = false
+	for block in allTetrominoes:
+		block.visible = false
+	get_tree().paused = true
+	$SettingsBackground.visible = true
+	screen.visible = true
+	for i in range(9):
+		$SettingsBackground.modulate.a+=0.05
+		screen.modulate.a+=0.2
+		await get_tree().create_timer(0.005).timeout	
+		
 func _on_settings_button_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		$Settings.paused = true
-		$Background.volume_db = -20
-		for block in allTetrominoes:
-			block.visible = false
-		get_tree().paused = true
-		$SettingsBackground.visible = true
-		$Settings.visible = true
-		for i in range(9):
-			$SettingsBackground.modulate.a+=0.05
-			$Settings.modulate.a+=0.2
-			await get_tree().create_timer(0.005).timeout
-			
-func resume():
-	$Settings.resume = false
+		openScreen($Settings)
+
+func _on_music_button_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		openScreen($MusicSettings)
+
+func deathScreen():
+	$Lose.visible = true
+	openScreen($DeathScreen)
+	
+		
+func resume(setting):
+	setting.resume = false
 	$Background.volume_db = 0
 	for block in allTetrominoes:
 		block.visible = true
 	for i in range(9):
 		$SettingsBackground.modulate.a-=0.05
-		$Settings.modulate.a-=0.2
+		setting.modulate.a-=0.2
 		await get_tree().create_timer(0.005).timeout
 	$SettingsBackground.visible = false
-	$Settings.visible = false
+	setting.visible = false
+	$ShadowPiece.visible = true
 
+	
+	
 func restart():
+	get_tree().paused = false
 	$Settings.restart = false
 	get_tree().reload_current_scene()
 		
+
+

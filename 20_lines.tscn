@@ -1,0 +1,195 @@
+[gd_scene load_steps=15 format=3 uid="uid://bqxyt6malqtw1"]
+
+[ext_resource type="Script" path="res://20_lines.gd" id="1_qh6q6"]
+[ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="2_fa65m"]
+[ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="3_vvomx"]
+[ext_resource type="Texture2D" uid="uid://vs566gkdawws" path="res://white_background.png" id="4_3ihm3"]
+[ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="5_lawar"]
+[ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="6_ajr50"]
+[ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="7_fi82y"]
+[ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="8_5erd5"]
+[ext_resource type="Texture2D" uid="uid://c6n38fceav23p" path="res://musicIcon.png" id="9_xfvsb"]
+[ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="10_navgm"]
+[ext_resource type="Texture2D" uid="uid://d2b4a2gpe2m15" path="res://settingsBackground.jpg" id="11_ag7dh"]
+[ext_resource type="PackedScene" uid="uid://cg1lllddle8yb" path="res://Settings.tscn" id="12_n0fd1"]
+[ext_resource type="PackedScene" uid="uid://qr6nwkj40qdo" path="res://music_settings.tscn" id="13_1m1bm"]
+[ext_resource type="PackedScene" uid="uid://dtib0spjs2n0q" path="res://death_screen.tscn" id="14_jdtdc"]
+
+[node name="20Lines" type="Node2D"]
+process_mode = 1
+texture_filter = 1
+position = Vector2(40, 728)
+script = ExtResource("1_qh6q6")
+metadata/_edit_horizontal_guides_ = [-73.0]
+metadata/_edit_vertical_guides_ = [41.0]
+
+[node name="GameBackground" type="Sprite2D" parent="."]
+position = Vector2(-6, 4)
+scale = Vector2(0.213, 0.213)
+texture = ExtResource("2_fa65m")
+
+[node name="GameBackground2" type="Sprite2D" parent="."]
+modulate = Color(1, 0.686275, 0.196078, 0.223529)
+position = Vector2(-3.74999, 2.24999)
+scale = Vector2(0.646, 0.492)
+texture = ExtResource("3_vvomx")
+
+[node name="WhiteBackground" type="Sprite2D" parent="."]
+modulate = Color(1, 0.67451, 1, 0.647059)
+scale = Vector2(-0.048, -0.125)
+texture = ExtResource("4_3ihm3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -1)
+zoom = Vector2(4.092, 4.092)
+
+[node name="Hold" type="Label" parent="."]
+texture_filter = 1
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 40.0
+offset_bottom = 20.0
+scale = Vector2(0.25, 0.25)
+theme_override_font_sizes/font_size = 60
+text = "Hold"
+
+[node name="Score" type="Label" parent="."]
+texture_filter = 1
+offset_left = -195.0
+offset_top = -85.0
+offset_right = -155.0
+offset_bottom = -59.0
+text = "Score:
+0"
+
+[node name="Next" type="Label" parent="."]
+texture_filter = 1
+offset_left = 56.0
+offset_top = -69.0
+offset_right = 195.0
+offset_bottom = 17.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Next"
+
+[node name="TetrisBackground" type="Sprite2D" parent="."]
+modulate = Color(0.141176, 1, 0.976471, 1)
+position = Vector2(0, 8.0695)
+scale = Vector2(0.506848, 0.502707)
+texture = ExtResource("5_lawar")
+
+[node name="ShadowPiece" parent="." instance=ExtResource("6_ajr50")]
+position = Vector2(-40, -72)
+
+[node name="Background" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_fi82y")
+autoplay = true
+
+[node name="Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5erd5")
+
+[node name="PieceEffects" type="AudioStreamPlayer" parent="."]
+volume_db = 5.622
+max_polyphony = 3
+
+[node name="LineCount" type="Label" parent="."]
+offset_left = -119.0
+offset_top = 13.0
+offset_right = -79.0
+offset_bottom = 39.0
+scale = Vector2(0.644, 0.644)
+text = "10"
+
+[node name="LinesLeft" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -48.0
+offset_right = 22.0
+offset_bottom = -22.0
+text = "20"
+horizontal_alignment = 1
+
+[node name="MusicButton" type="Area2D" parent="."]
+position = Vector2(112, -44)
+scale = Vector2(0.004, 0.004)
+
+[node name="MusicIcon" type="Sprite2D" parent="MusicButton"]
+position = Vector2(-250, 250)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("9_xfvsb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MusicButton"]
+polygon = PackedVector2Array(750, -1000, 750, 1250, -1250, 1500, -1500, 750, -750, -750)
+
+[node name="SettingsButton" type="Area2D" parent="."]
+position = Vector2(111.162, -56.5028)
+rotation = -3.14159
+scale = Vector2(0.03, 0.03)
+
+[node name="SettingsSymbol" type="Sprite2D" parent="SettingsButton"]
+position = Vector2(-27.9219, -16.7617)
+rotation = 3.14159
+scale = Vector2(0.605913, 0.605913)
+texture = ExtResource("10_navgm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SettingsButton"]
+polygon = PackedVector2Array(-61.2554, 149.906, -61.2554, 83.2391, -94.5884, 83.2391, -127.922, 83.2391, -194.588, 16.5725, -161.255, 16.5725, -161.255, -16.7609, -161.255, -50.0942, -127.922, -116.761, -94.5884, -116.761, -61.2554, -183.428, 5.41162, -183.428, 5.41162, -116.761, 38.7446, -116.761, 105.412, -116.761, 138.745, -50.0942, 72.0781, -16.7609, 105.412, 16.5725, 105.412, 116.572, 38.7446, 83.2391, 5.41162, 116.572, 5.41162, 149.906)
+
+[node name="SettingsBackground" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.996078, 0.396078, 0.407843, 0)
+position = Vector2(-5, 1)
+texture = ExtResource("11_ag7dh")
+
+[node name="Settings" parent="." instance=ExtResource("12_n0fd1")]
+process_mode = 3
+visible = false
+offset_left = -26.0
+offset_top = -56.0
+offset_right = 822.0
+offset_bottom = -55.787
+scale = Vector2(0.58, 0.58)
+
+[node name="MusicSettings" parent="." instance=ExtResource("13_1m1bm")]
+process_mode = 3
+visible = false
+offset_left = -108.0
+offset_top = -98.0
+offset_right = -108.0
+offset_bottom = -98.0
+scale = Vector2(0.564, 0.564)
+
+[node name="DeathScreen" parent="." instance=ExtResource("14_jdtdc")]
+process_mode = 3
+visible = false
+offset_left = -76.0
+offset_top = -177.0
+offset_right = 772.0
+offset_bottom = -176.787
+scale = Vector2(1.012, 1.012)
+
+[node name="Lose" type="Label" parent="."]
+visible = false
+offset_left = -41.0
+offset_top = -28.0
+offset_right = 209.0
+offset_bottom = 58.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "You Lost"
+
+[node name="Win" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -43.0
+offset_right = 340.0
+offset_bottom = 64.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event" flags=18]
+[connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event" flags=18]

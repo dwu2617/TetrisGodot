@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtib0spjs2n0q"]
+
+[ext_resource type="Script" path="res://death_screen.gd" id="1_kpi3o"]
+
+[node name="DeathScreen" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 336.0
+offset_top = -216.0
+offset_right = 1184.0
+offset_bottom = -215.787
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.42, 2.42)
+script = ExtResource("1_kpi3o")
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 2
+offset_left = -9.0
+offset_top = 188.0
+offset_right = 210.0
+offset_bottom = 279.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Restart"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 114.0
+offset_top = 188.0
+offset_right = 229.0
+offset_bottom = 279.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 188.0
+offset_right = 233.0
+offset_bottom = 279.0
+scale = Vector2(0.275, 0.275)
+theme_override_font_sizes/font_size = 60
+text = "Menu"
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed" flags=18]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed" flags=18]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed" flags=18]

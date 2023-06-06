@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bs2nwbaut4aea"
+path="res://.godot/imported/Hold On Tight Instrumental.mp3-1cf38553f36effd75aaa1f35a6802fb1.mp3str"
+
+[deps]
+
+source_file="res://Hold On Tight Instrumental.mp3"
+dest_files=["res://.godot/imported/Hold On Tight Instrumental.mp3-1cf38553f36effd75aaa1f35a6802fb1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

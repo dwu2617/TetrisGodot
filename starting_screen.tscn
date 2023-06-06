@@ -29,6 +29,10 @@ text = "TETRIS"
 layout_mode = 2
 text = "Start"
 
+[node name="20Lines" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "20 Lines"
+
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Tutorial"
@@ -45,5 +49,6 @@ autoplay = true
 mix_target = 1
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/20Lines" to="." method="_on_20_lines_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

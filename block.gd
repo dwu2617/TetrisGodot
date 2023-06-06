@@ -21,7 +21,7 @@ var sdf = 10
 var rightBounded = false
 var leftBounded = false
 var done = false
-var doneCounter = 200
+var doneCounter = 100
 var hardDrop = false
 var map
 var active = false
@@ -47,7 +47,7 @@ func _physics_process(delta):
 		if count == 0:
 			for block in self.get_children():
 				children.append(block)
-		count += 1	
+		count += 1
 		getCells()
 		if count%gravity_time == 0 && playing && !hardDrop && getLowest()<floorBound:
 			shift_y(1)
@@ -62,17 +62,17 @@ func _physics_process(delta):
 	
 		
 func actions(count):
-	if !done:		
+	if !done:
 		pieceEffect = null
 		if Input.is_action_just_pressed("Counterclockwise"):
 			rotate_block(PI/2)
 			checkRotation(PI/2)
 		elif Input.is_action_just_pressed("Clockwise"):
-			rotate_block(-PI/2)	
+			rotate_block(-PI/2)
 			checkRotation(PI/2)
 		if Input.is_action_just_pressed("Left"):
 			pieceEffect = move_piece
-			move_left()	
+			move_left()
 		elif Input.is_action_pressed("Left"):
 			dasLeftCount +=1
 			dasRightCount = 0
@@ -81,7 +81,7 @@ func actions(count):
 					move_left()
 		if Input.is_action_just_pressed("Right"):
 			pieceEffect = move_piece
-			move_right()				
+			move_right()
 		elif Input.is_action_pressed("Right"):
 			dasRightCount +=1
 			dasLeftCount = 0
@@ -91,7 +91,7 @@ func actions(count):
 		if can180 == true:
 			if Input.is_action_just_pressed("180"):
 				rotate_block(PI)
-				checkRotation(PI/2)					
+				checkRotation(PI/2)
 		if Input.is_action_pressed("Softdrop"):
 			soft_drop()
 		if Input.is_action_just_released("Softdrop"):
@@ -121,7 +121,7 @@ func checkRotation(radians):
 	var sinTheta = sin(radians)
 	var furthestPoint = 4
 
-	for i in range(cells.size()):		
+	for i in range(cells.size()):
 		var cellPosition = cells[i]
 		var translatedPoint = cellPosition - pivotPoint
 		var rotatedX = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta
@@ -136,7 +136,7 @@ func checkRotation(radians):
 		
 		if change((Vector2(rotatedX,rotatedY) + pivotPoint).x)>9:
 			if (Vector2(rotatedX,rotatedY) + pivotPoint).x > furthestPoint:
-				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8 
+				furthestPoint = (Vector2(rotatedX,rotatedY) + pivotPoint).x - 8*8
 	rotationDisplacement = -(furthestPoint-4)/8
 	shift_x(rotationDisplacement)
 
@@ -187,15 +187,15 @@ func isDone():
 	return done
 
 func shift_y(shift):
-	for block in self.get_children():	
+	for block in self.get_children():
 		block.position.y += shift * 8
 func shift_x(shift):
-	for block in self.get_children():	
+	for block in self.get_children():
 		block.position.x += shift * 8
 
 func checkPositions():
 	var pos = []
-	for block in self.get_children():	
+	for block in self.get_children():
 		pos.append([getX(block),getY(block)])
 	return pos
 
@@ -207,21 +207,21 @@ func getY(block):
 	
 func getLowest():
 	var lowestBlock = -10
-	for block in self.get_children():			
+	for block in self.get_children():
 		if getY(block) > lowestBlock:
 			lowestBlock = getY(block)
-	return lowestBlock 
+	return lowestBlock
 	
 func getLeft():
 	var left = 9999
-	for block in self.get_children():			
+	for block in self.get_children():
 		if getX(block) <= left:
 			left = getX(block)
 	return left
 	
 func getRight():
 	var right = -9999
-	for block in self.get_children():			
+	for block in self.get_children():
 		if getX(block) >= right:
 			right = getX(block)
 	return right
@@ -230,7 +230,7 @@ func getRight():
 func setBoundaries(mapArray, bottomArray):
 	rightBounded = false
 	leftBounded = false
-	for block in self.get_children():	
+	for block in self.get_children():
 		if mapArray[getY(block)][getX(block)-1] == "[]":
 			leftBounded = true
 		if mapArray[getY(block)][getX(block)+1] == "[]":
@@ -239,7 +239,7 @@ func setBoundaries(mapArray, bottomArray):
 	bottom = bottomArray
 
 func checkBoundaries():
-	for block in self.get_children():	
+	for block in self.get_children():
 		if map[getY(block)][getX(block)-1] == "[]":
 			leftBounded = true
 		if map[getY(block)][getX(block)+1] == "[]":
@@ -251,7 +251,7 @@ func change(value):
 func clear(block):
 	block.play("clear")
 	await get_tree().create_timer(0.05).timeout
-	block.queue_free()	
+	block.queue_free()
 	
 func move(block):
 	await get_tree().create_timer(0.02).timeout

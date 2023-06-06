@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://qr6nwkj40qdo"]
+
+[ext_resource type="Script" path="res://music_settings.gd" id="1_mo7r7"]
+
+[node name="MusicSettings" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mo7r7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 53.0
+offset_right = 127.0
+offset_bottom = 93.0
+
+[node name="Song" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Song
+"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Sound Effects" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sound Effects"
+
+[node name="EffectSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+step = 2.0
+tick_count = 10
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+step = 5.0
+tick_count = 10
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 2
+offset_left = 160.0
+offset_top = 233.0
+offset_right = 400.0
+offset_bottom = 324.0
+scale = Vector2(0.408, 0.408)
+theme_override_font_sizes/font_size = 60
+text = "Resume"
+
+[connection signal="item_selected" from="VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/EffectSlider" to="." method="_on_effect_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]

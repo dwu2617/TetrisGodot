@@ -21,3 +21,7 @@ func _on_exit_pressed():
 
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://tutorial.tscn")
+
+
+func _on_20_lines_pressed():
+	get_tree().change_scene_to_file("res://20_lines.tscn")
