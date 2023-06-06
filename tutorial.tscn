@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bi1o7l72835yc"]
+[gd_scene load_steps=13 format=3 uid="uid://bi1o7l72835yc"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_twblh"]
 [ext_resource type="Texture2D" uid="uid://c2b1gwk0smxw2" path="res://game_background.png" id="1_vh60a"]
 [ext_resource type="Texture2D" uid="uid://i6nl80ebvvt3" path="res://background2.jpeg" id="2_v3nej"]
 [ext_resource type="Texture2D" uid="uid://d4a81i40bh51g" path="res://tetrisBackground.png" id="3_y3agf"]
 [ext_resource type="PackedScene" uid="uid://bqyqwvfkcnlkd" path="res://shadow_piece.tscn" id="4_44hqt"]
+[ext_resource type="Texture2D" uid="uid://vs566gkdawws" path="res://white_background.png" id="4_by5q7"]
 [ext_resource type="AudioStream" uid="uid://djo4rs766vks7" path="res://tetrisTheme.mp3" id="5_f6lm0"]
 [ext_resource type="AudioStream" uid="uid://bdix5s7f5q6lb" path="res://Sound Effects/tetris-gb-18-move-piece.mp3" id="6_nuntq"]
 [ext_resource type="Texture2D" uid="uid://b3ru3hlxd5woj" path="res://settingsButton.png" id="7_kh8nd"]
@@ -62,6 +63,12 @@ scale = Vector2(0.275, 0.275)
 theme_override_font_sizes/font_size = 60
 text = "Next"
 
+[node name="WhiteBackground" type="Sprite2D" parent="."]
+modulate = Color(0.890196, 0.819608, 0.207843, 0.647059)
+rotation = 3.14159
+scale = Vector2(0.048, 0.125)
+texture = ExtResource("4_by5q7")
+
 [node name="TetrisBackground" type="Sprite2D" parent="."]
 position = Vector2(0, 8.0695)
 scale = Vector2(0.506848, 0.502707)
@@ -112,7 +119,6 @@ scale = Vector2(0.485, 0.485)
 [node name="Settings" parent="." instance=ExtResource("9_s2xa5")]
 process_mode = 3
 visible = false
-modulate = Color(0.470588, 0.662745, 0.792157, 0)
 offset_left = -26.0
 offset_top = -56.0
 offset_right = 822.0

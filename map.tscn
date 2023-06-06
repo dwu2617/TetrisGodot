@@ -17,6 +17,7 @@
 
 [node name="Map" type="Node2D"]
 process_mode = 1
+texture_filter = 1
 position = Vector2(40, 728)
 script = ExtResource("1_pdvgp")
 metadata/_edit_horizontal_guides_ = [-73.0]
@@ -34,13 +35,14 @@ scale = Vector2(0.646, 0.492)
 texture = ExtResource("3_0c60k")
 
 [node name="WhiteBackground" type="Sprite2D" parent="."]
-modulate = Color(1, 0.67451, 1, 0.647059)
+modulate = Color(0.87451, 0.811765, 0.521569, 0.647059)
 scale = Vector2(-0.048, -0.125)
 texture = ExtResource("4_us1uw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -1)
-zoom = Vector2(4.092, 4.092)
+offset = Vector2(0, 1.103)
+zoom = Vector2(4.319, 4.319)
 
 [node name="Hold" type="Label" parent="."]
 texture_filter = 1
@@ -125,6 +127,67 @@ modulate = Color(0.996078, 0.396078, 0.407843, 0)
 position = Vector2(-5, 1)
 texture = ExtResource("10_xva0x")
 
+[node name="Lose" type="Label" parent="."]
+visible = false
+offset_left = -43.0
+offset_top = -45.0
+offset_right = 207.0
+offset_bottom = 41.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "You Lost"
+
+[node name="Win" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -43.0
+offset_right = 340.0
+offset_bottom = 64.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Stats" type="Label" parent="."]
+offset_left = -122.0
+offset_top = 18.0
+offset_right = -82.0
+offset_bottom = 44.0
+scale = Vector2(0.644, 0.644)
+text = "10"
+
+[node name="ScoreCount" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -48.0
+offset_right = 21.0
+offset_bottom = -22.0
+text = "20"
+horizontal_alignment = 1
+
+[node name="Stats2" type="Label" parent="."]
+offset_left = -130.0
+offset_top = -70.0
+offset_right = -90.0
+offset_bottom = -44.0
+scale = Vector2(0.326, 0.326)
+theme_override_colors/font_color = Color(0.215686, 0.639216, 0, 1)
+text = "10"
+
+[node name="Level" type="Label" parent="."]
+offset_left = -70.0
+offset_top = -43.0
+offset_right = 345.0
+offset_bottom = 64.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
+theme_override_font_sizes/font_size = 60
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Settings" parent="." instance=ExtResource("4_n60b8")]
 process_mode = 3
 visible = false
@@ -151,29 +214,6 @@ offset_top = -182.0
 offset_right = 778.0
 offset_bottom = -181.787
 scale = Vector2(1.039, 1.039)
-
-[node name="Lose" type="Label" parent="."]
-visible = false
-offset_left = -43.0
-offset_top = -45.0
-offset_right = 207.0
-offset_bottom = 41.0
-scale = Vector2(0.335, 0.335)
-theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "You Lost"
-
-[node name="Win" type="Label" parent="."]
-offset_left = -75.0
-offset_top = -43.0
-offset_right = 340.0
-offset_bottom = 64.0
-scale = Vector2(0.335, 0.335)
-theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
-theme_override_font_sizes/font_size = 60
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event"]
 [connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event"]

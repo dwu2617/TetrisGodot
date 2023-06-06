@@ -31,7 +31,7 @@ func _process(delta):
 		$Label.text = "C to \nhold piece"
 		space = true
 	if Input.is_action_just_pressed("Hold") && c == false && space == true:
-		$Label.text = "Move using right and left arrows"
+		$Label.text = "Move using right \nand left arrows"
 		c = true
 	if Input.is_action_just_pressed("Left") && move == false && c == true:
 		$Label.text = "Tutorial Finished!\nSettings-> Menu"

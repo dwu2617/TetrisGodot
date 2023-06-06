@@ -39,10 +39,6 @@ modulate = Color(1, 0.67451, 1, 0.647059)
 scale = Vector2(-0.048, -0.125)
 texture = ExtResource("4_3ihm3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, -1)
-zoom = Vector2(4.092, 4.092)
-
 [node name="Hold" type="Label" parent="."]
 texture_filter = 1
 offset_left = -96.0
@@ -80,6 +76,11 @@ texture = ExtResource("5_lawar")
 
 [node name="ShadowPiece" parent="." instance=ExtResource("6_ajr50")]
 position = Vector2(-40, -72)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -1)
+offset = Vector2(0, 1.103)
+zoom = Vector2(4.319, 4.319)
 
 [node name="Background" type="AudioStreamPlayer" parent="."]
 process_mode = 3

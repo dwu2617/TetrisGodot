@@ -27,6 +27,9 @@ var tetris_clear = preload("res://Sound Effects/tetris-gb-22-tetris-4-lines.mp3"
 var death = preload("res://Sound Effects/tetris-gb-25-game-over.mp3")
 var theme 
 var previousX
+var numLines = 0
+var pps = 0
+var lastElapsed = 0
 
 var block_array = ['i','o','t','s','z','l','j']
 var i_block = load("res://i_block.tscn")
@@ -38,8 +41,56 @@ var l_block = load("res://l_block.tscn")
 var j_block = load("res://j_block.tscn")
 var count = 0
 var block_index = count%7
+var time = 60
+var elapsed = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if global.level == 1:
+		global.gravity_time = 30
+		global.goal = 3000
+		global.multiplier = 1
+	elif global.level == 2:
+		global.gravity_time = 25
+		global.goal = 10000
+		global.multiplier = 2
+	elif global.level == 3:
+		global.gravity_time = 20
+		global.goal = 30000
+		global.multiplier = 5
+	elif global.level == 4:
+		global.gravity_time = 15
+		global.goal = 75000
+		global.multiplier = 7
+	elif global.level == 5:
+		global.gravity_time = 10
+		global.goal = 100000
+		global.multiplier = 10
+	elif global.level == 6:
+		global.gravity_time = 8
+		global.goal = 150000
+		global.multiplier = 15
+	elif global.level == 7:
+		global.gravity_time = 6
+		global.goal = 300000
+		global.multiplier = 25
+	elif global.level == 8:
+		global.gravity_time = 4
+		global.goal = 500000
+		global.multiplier = 40
+	elif global.level == 9:
+		global.gravity_time = 2
+		global.goal = 1000000
+		global.multiplier = 100
+	elif global.level == 10:
+		global.gravity_time = 1
+		global.goal = 10000000
+		global.multiplier = 500
+	elif global.level == 11:
+		$Win.text = "You Win!"
+		deathScreen()
+	$Level.text = "Level %d" %global.level
+	
+	entryText()
 	
 	initializeMap() # Replace with function body.
 	shuffle_blocks()
@@ -78,6 +129,7 @@ func _ready():
 	current_block.position = Vector2(0,0)
 	get_tree().get_root().add_child.call_deferred(current_block)
 	current_block.active=true
+	current_block.gravity_time = global.gravity_time
 	previousX = current_block.getLeft()
 	
 
@@ -157,13 +209,13 @@ func checkRows():
 					for blocks in tetromino.get_children():
 						if tetromino.getY(blocks) == i:
 							map[tetromino.getY(blocks)][tetromino.getX(blocks)] = "--"
-							tetromino.clear(blocks)							
-											
-							score += 20 * linesCleared
+							tetromino.clear(blocks)									
+							score += global.multiplier * 20 * linesCleared
 						elif tetromino.getY(blocks) < i:
 							if tetromino.active == true:
 								tetromino.move(blocks)
 			linesCleared += 1
+			numLines +=1		
 			shiftDown(map_height-i)
 		if linesCleared < 4:
 			$Effects.stream = line_clear
@@ -229,7 +281,24 @@ func dead():
 				return true
 	return false
 func _process(delta): 
+	
+	if score > global.goal:
+		nextLevel()
+	
+	if elapsed !=0:
+		pps = (tetrominoCount-4)/elapsed
+	if Input.is_action_just_pressed("Restart"):
+		restart()
+	
+	else:
+		elapsed += delta
+	
+	$Stats2.text = str("LEVEL ", global.level, "\n", score, "/", global.goal)
+	$Stats.text=str("goal ",global.goal, "\n", "score " , score, "\n", "pps ", "%0.2f" % pps )
+	$ScoreCount.text=str(score)
+
 	if dead():
+		$Lose.visible = true
 		$Effects.stream = death
 		$Effects.play()
 		deathScreen()
@@ -312,6 +381,8 @@ func _process(delta):
 			current_block.shift_y(82)
 			current_block.position = (Vector2(0,0))
 			current_block.active = true
+			current_block.gravity_time = global.gravity_time
+			
 			get_tree().get_root().add_child(wait_block)
 			allTetrominoes.append(wait_block)		
 				
@@ -347,11 +418,16 @@ func _process(delta):
 			restart()
 		if $MusicSettings.resume:
 			resume($MusicSettings)
+		
 
+
+		
+		
 func openScreen(screen):
 	screen.paused = true
 	$Background.volume_db = -20
 	$ShadowPiece.visible = false
+	$ScoreCount.visible = false
 	for block in allTetrominoes:
 		block.visible = false
 	get_tree().paused = true
@@ -371,7 +447,6 @@ func _on_music_button_input_event(viewport, event, shape_idx):
 		openScreen($MusicSettings)
 
 func deathScreen():
-	$Lose.visible = true
 	openScreen($DeathScreen)
 	
 		
@@ -387,13 +462,22 @@ func resume(setting):
 	$SettingsBackground.visible = false
 	setting.visible = false
 	$ShadowPiece.visible = true
+	$ScoreCount.visible = true
 
-	
+func nextLevel():
+	global.level+=1
+	restart()	
 	
 func restart():
 	get_tree().paused = false
 	$Settings.restart = false
 	get_tree().reload_current_scene()
 		
-
+func entryText():
+	await get_tree().create_timer(0.5).timeout
+	var modulation = 0.001
+	for i in range(20):
+		$Level.modulate.a-=modulation
+		modulation*=2
+		await get_tree().create_timer(0.005).timeout
 

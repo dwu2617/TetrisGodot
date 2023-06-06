@@ -35,13 +35,14 @@ scale = Vector2(0.646, 0.492)
 texture = ExtResource("3_shngf")
 
 [node name="WhiteBackground" type="Sprite2D" parent="."]
-modulate = Color(1, 0.67451, 1, 0.647059)
+modulate = Color(0.188235, 0.909804, 0.952941, 0.647059)
 scale = Vector2(-0.048, -0.125)
 texture = ExtResource("4_un0k7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -1)
-zoom = Vector2(4.092, 4.092)
+offset = Vector2(0, 1.103)
+zoom = Vector2(4.319, 4.319)
 
 [node name="Hold" type="Label" parent="."]
 texture_filter = 1
@@ -141,6 +142,29 @@ modulate = Color(0.996078, 0.396078, 0.407843, 0)
 position = Vector2(-5, 1)
 texture = ExtResource("11_75vhn")
 
+[node name="Lose" type="Label" parent="."]
+visible = false
+offset_left = -41.0
+offset_top = -28.0
+offset_right = 209.0
+offset_bottom = 58.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "You Lost"
+
+[node name="Win" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -43.0
+offset_right = 340.0
+offset_bottom = 64.0
+scale = Vector2(0.335, 0.335)
+theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Settings" parent="." instance=ExtResource("12_eymvd")]
 process_mode = 3
 visible = false
@@ -167,29 +191,6 @@ offset_top = -177.0
 offset_right = 772.0
 offset_bottom = -176.787
 scale = Vector2(1.012, 1.012)
-
-[node name="Lose" type="Label" parent="."]
-visible = false
-offset_left = -41.0
-offset_top = -28.0
-offset_right = 209.0
-offset_bottom = 58.0
-scale = Vector2(0.335, 0.335)
-theme_override_colors/font_color = Color(0.878431, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "You Lost"
-
-[node name="Win" type="Label" parent="."]
-offset_left = -75.0
-offset_top = -43.0
-offset_right = 340.0
-offset_bottom = 64.0
-scale = Vector2(0.335, 0.335)
-theme_override_colors/font_color = Color(0, 0.552941, 0.388235, 1)
-theme_override_font_sizes/font_size = 60
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [connection signal="input_event" from="MusicButton" to="." method="_on_music_button_input_event" flags=18]
 [connection signal="input_event" from="SettingsButton" to="." method="_on_settings_button_input_event" flags=18]

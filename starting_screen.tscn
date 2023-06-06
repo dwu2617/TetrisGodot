@@ -27,7 +27,7 @@ text = "TETRIS"
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Start"
+text = "Levels"
 
 [node name="Blitz" type="Button" parent="VBoxContainer"]
 layout_mode = 2
